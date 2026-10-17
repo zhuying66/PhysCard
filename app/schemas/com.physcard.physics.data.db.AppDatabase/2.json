@@ -1,0 +1,642 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "ba8a8f33e640fcf58a25a370acead3a4",
+    "entities": [
+      {
+        "tableName": "formulas",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `module` TEXT NOT NULL, `chapter` TEXT NOT NULL, `textbook` TEXT NOT NULL, `latex` TEXT NOT NULL, `conditions` TEXT NOT NULL, `variablesJson` TEXT NOT NULL, `confusionsJson` TEXT NOT NULL, `relatedIdsJson` TEXT NOT NULL, `orderIndex` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "module",
+            "columnName": "module",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chapter",
+            "columnName": "chapter",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "textbook",
+            "columnName": "textbook",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latex",
+            "columnName": "latex",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "conditions",
+            "columnName": "conditions",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "variablesJson",
+            "columnName": "variablesJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "confusionsJson",
+            "columnName": "confusionsJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "relatedIdsJson",
+            "columnName": "relatedIdsJson",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderIndex",
+            "columnName": "orderIndex",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_formulas_module",
+            "unique": false,
+            "columnNames": [
+              "module"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_formulas_module` ON `${TABLE_NAME}` (`module`)"
+          },
+          {
+            "name": "index_formulas_orderIndex",
+            "unique": false,
+            "columnNames": [
+              "orderIndex"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_formulas_orderIndex` ON `${TABLE_NAME}` (`orderIndex`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "questions",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `formulaId` TEXT NOT NULL, `ability` TEXT NOT NULL, `prompt` TEXT NOT NULL, `stimulusLatex` TEXT, PRIMARY KEY(`id`), FOREIGN KEY(`formulaId`) REFERENCES `formulas`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "formulaId",
+            "columnName": "formulaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ability",
+            "columnName": "ability",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "prompt",
+            "columnName": "prompt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stimulusLatex",
+            "columnName": "stimulusLatex",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_questions_formulaId",
+            "unique": false,
+            "columnNames": [
+              "formulaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_questions_formulaId` ON `${TABLE_NAME}` (`formulaId`)"
+          },
+          {
+            "name": "index_questions_formulaId_ability",
+            "unique": false,
+            "columnNames": [
+              "formulaId",
+              "ability"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_questions_formulaId_ability` ON `${TABLE_NAME}` (`formulaId`, `ability`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "formulas",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "formulaId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "question_options",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`questionId` TEXT NOT NULL, `orderIndex` INTEGER NOT NULL, `latex` TEXT, `text` TEXT, PRIMARY KEY(`questionId`, `orderIndex`), FOREIGN KEY(`questionId`) REFERENCES `questions`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "questionId",
+            "columnName": "questionId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "orderIndex",
+            "columnName": "orderIndex",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latex",
+            "columnName": "latex",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "questionId",
+            "orderIndex"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_question_options_questionId",
+            "unique": false,
+            "columnNames": [
+              "questionId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_question_options_questionId` ON `${TABLE_NAME}` (`questionId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "questions",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "questionId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "question_answers",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`questionId` TEXT NOT NULL, `correctOptionIndex` INTEGER NOT NULL, `explanation` TEXT NOT NULL, PRIMARY KEY(`questionId`), FOREIGN KEY(`questionId`) REFERENCES `questions`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "questionId",
+            "columnName": "questionId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "correctOptionIndex",
+            "columnName": "correctOptionIndex",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "explanation",
+            "columnName": "explanation",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "questionId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "questions",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "questionId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "review_states",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`cardKey` TEXT NOT NULL, `formulaId` TEXT NOT NULL, `ability` TEXT NOT NULL, `introduced` INTEGER NOT NULL, `cardId` INTEGER NOT NULL, `fsrsState` TEXT NOT NULL, `step` INTEGER, `stability` REAL, `difficulty` REAL, `dueAt` INTEGER, `lastReviewAt` INTEGER, `reviewCount` INTEGER NOT NULL, `lapseCount` INTEGER NOT NULL, `correctCount` INTEGER NOT NULL, `level` INTEGER NOT NULL, `levelPoints` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `updatedAt` INTEGER NOT NULL, PRIMARY KEY(`cardKey`), FOREIGN KEY(`formulaId`) REFERENCES `formulas`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "cardKey",
+            "columnName": "cardKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "formulaId",
+            "columnName": "formulaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ability",
+            "columnName": "ability",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "introduced",
+            "columnName": "introduced",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cardId",
+            "columnName": "cardId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fsrsState",
+            "columnName": "fsrsState",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "step",
+            "columnName": "step",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "stability",
+            "columnName": "stability",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "difficulty",
+            "columnName": "difficulty",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dueAt",
+            "columnName": "dueAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastReviewAt",
+            "columnName": "lastReviewAt",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "reviewCount",
+            "columnName": "reviewCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lapseCount",
+            "columnName": "lapseCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "correctCount",
+            "columnName": "correctCount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "level",
+            "columnName": "level",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "levelPoints",
+            "columnName": "levelPoints",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "cardKey"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_review_states_formulaId",
+            "unique": false,
+            "columnNames": [
+              "formulaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_states_formulaId` ON `${TABLE_NAME}` (`formulaId`)"
+          },
+          {
+            "name": "index_review_states_dueAt",
+            "unique": false,
+            "columnNames": [
+              "dueAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_states_dueAt` ON `${TABLE_NAME}` (`dueAt`)"
+          },
+          {
+            "name": "index_review_states_introduced_dueAt",
+            "unique": false,
+            "columnNames": [
+              "introduced",
+              "dueAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_states_introduced_dueAt` ON `${TABLE_NAME}` (`introduced`, `dueAt`)"
+          },
+          {
+            "name": "index_review_states_formulaId_dueAt",
+            "unique": false,
+            "columnNames": [
+              "formulaId",
+              "dueAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_states_formulaId_dueAt` ON `${TABLE_NAME}` (`formulaId`, `dueAt`)"
+          },
+          {
+            "name": "index_review_states_formulaId_ability",
+            "unique": true,
+            "columnNames": [
+              "formulaId",
+              "ability"
+            ],
+            "orders": [],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_review_states_formulaId_ability` ON `${TABLE_NAME}` (`formulaId`, `ability`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "formulas",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "formulaId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "review_logs",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `cardKey` TEXT NOT NULL, `formulaId` TEXT NOT NULL, `ability` TEXT NOT NULL, `reviewedAt` INTEGER NOT NULL, `localDate` TEXT NOT NULL, `rating` TEXT NOT NULL, `correct` INTEGER NOT NULL, `selectedOption` INTEGER NOT NULL, `correctOption` INTEGER NOT NULL, `scheduledMinutes` INTEGER NOT NULL, `elapsedDays` INTEGER NOT NULL, `levelBefore` INTEGER NOT NULL, `levelAfter` INTEGER NOT NULL, `stabilityAfter` REAL, `difficultyAfter` REAL, `durationMs` INTEGER NOT NULL, `wasFirstReview` INTEGER NOT NULL, `wasFormulaFirstReview` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cardKey",
+            "columnName": "cardKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "formulaId",
+            "columnName": "formulaId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "ability",
+            "columnName": "ability",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "reviewedAt",
+            "columnName": "reviewedAt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "localDate",
+            "columnName": "localDate",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "correct",
+            "columnName": "correct",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "selectedOption",
+            "columnName": "selectedOption",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "correctOption",
+            "columnName": "correctOption",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "scheduledMinutes",
+            "columnName": "scheduledMinutes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "elapsedDays",
+            "columnName": "elapsedDays",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "levelBefore",
+            "columnName": "levelBefore",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "levelAfter",
+            "columnName": "levelAfter",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stabilityAfter",
+            "columnName": "stabilityAfter",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "difficultyAfter",
+            "columnName": "difficultyAfter",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "durationMs",
+            "columnName": "durationMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wasFirstReview",
+            "columnName": "wasFirstReview",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wasFormulaFirstReview",
+            "columnName": "wasFormulaFirstReview",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [
+          {
+            "name": "index_review_logs_reviewedAt",
+            "unique": false,
+            "columnNames": [
+              "reviewedAt"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_logs_reviewedAt` ON `${TABLE_NAME}` (`reviewedAt`)"
+          },
+          {
+            "name": "index_review_logs_localDate",
+            "unique": false,
+            "columnNames": [
+              "localDate"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_logs_localDate` ON `${TABLE_NAME}` (`localDate`)"
+          },
+          {
+            "name": "index_review_logs_formulaId",
+            "unique": false,
+            "columnNames": [
+              "formulaId"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_logs_formulaId` ON `${TABLE_NAME}` (`formulaId`)"
+          },
+          {
+            "name": "index_review_logs_cardKey",
+            "unique": false,
+            "columnNames": [
+              "cardKey"
+            ],
+            "orders": [],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_review_logs_cardKey` ON `${TABLE_NAME}` (`cardKey`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ba8a8f33e640fcf58a25a370acead3a4')"
+    ]
+  }
+}

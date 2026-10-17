@@ -1,0 +1,5 @@
+*
+!.gitignore
+!archive-apk.ps1
+!build-release.ps1
+!README.md

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "mechanics",
+    "name": "力学",
+    "description": "运动、力、能量与动量",
+    "accent": "#2F6F55",
+    "orderIndex": 0
+  },
+  {
+    "id": "waves",
+    "name": "振动与波",
+    "description": "简谐运动与机械波",
+    "accent": "#4F6E9C",
+    "orderIndex": 1
+  },
+  {
+    "id": "thermal",
+    "name": "热学",
+    "description": "分子动理论与气体定律",
+    "accent": "#B56A3A",
+    "orderIndex": 2
+  },
+  {
+    "id": "electromagnetism",
+    "name": "电磁学",
+    "description": "电场、电路、磁场与电磁感应",
+    "accent": "#8A5B8E",
+    "orderIndex": 3
+  },
+  {
+    "id": "optics",
+    "name": "光学",
+    "description": "几何光学与光的波动性",
+    "accent": "#3E7C8B",
+    "orderIndex": 4
+  },
+  {
+    "id": "modern",
+    "name": "近代物理",
+    "description": "原子、原子核与波粒二象性",
+    "accent": "#A05252",
+    "orderIndex": 5
+  }
+]

@@ -1,0 +1,18 @@
+*.iml
+.gradle
+.kotlin
+/local.properties
+/.idea
+.DS_Store
+build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# the release APK is produced at app/build/outputs/apk/release/PhysCard.apk (inside build/, ignored)
+/dist/
+
+/tools/__pycache__/
+/emu*.log
+/.research/

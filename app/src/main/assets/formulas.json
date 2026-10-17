@@ -1,0 +1,4124 @@
+[
+  {
+    "id": "acceleration_definition",
+    "title": "加速度的定义式",
+    "module": "mechanics",
+    "chapter": "运动的描述",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "a = \\frac{\\Delta v}{\\Delta t}",
+    "conditions": "用于描述速度变化的快慢。Δt 取一段时间时得到平均加速度；当 Δt 趋近于零时得到瞬时加速度。",
+    "variables": [
+      {
+        "symbol": "a",
+        "name": "加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "\\Delta v",
+        "name": "速度变化量",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "\\Delta t",
+        "name": "时间间隔",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "a = \\Delta v \\cdot \\Delta t",
+        "why": "加速度是速度变化量与时间的比值，不是乘积。"
+      },
+      {
+        "wrong": "a = \\frac{v}{t}",
+        "why": "只有当初速度为零且从静止开始计时时，v/t 才在数值上等于加速度，不能作为普遍定义。"
+      }
+    ],
+    "relatedIds": [
+      "velocity_time",
+      "displacement_time",
+      "velocity_displacement"
+    ],
+    "orderIndex": 0
+  },
+  {
+    "id": "velocity_time",
+    "title": "匀变速直线运动的速度公式",
+    "module": "mechanics",
+    "chapter": "匀变速直线运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "v = v_0 + at",
+    "conditions": "加速度 a 恒定的直线运动。v₀ 为初速度，v 为经过时间 t 后的末速度；先规定正方向，各量带符号代入。",
+    "variables": [
+      {
+        "symbol": "v",
+        "name": "末速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_0",
+        "name": "初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "a",
+        "name": "加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "t",
+        "name": "时间",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "v = v_0 + \\frac{1}{2}at^2",
+        "why": "这是位移公式的误写；速度只随 t 一次变化，不含 t²。"
+      },
+      {
+        "wrong": "v = at",
+        "why": "只有当 v₀ = 0 时才简化为 v = at，不能忽略初速度。"
+      }
+    ],
+    "relatedIds": [
+      "displacement_time",
+      "velocity_displacement",
+      "acceleration_definition"
+    ],
+    "orderIndex": 1
+  },
+  {
+    "id": "displacement_time",
+    "title": "匀变速直线运动的位移公式",
+    "module": "mechanics",
+    "chapter": "匀变速直线运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "x = v_0t + \\frac{1}{2}at^2",
+    "conditions": "加速度恒定的直线运动。x 为位移（不是路程），t 为从初速度 v₀ 开始计时的时间。",
+    "variables": [
+      {
+        "symbol": "x",
+        "name": "位移",
+        "unit": "m"
+      },
+      {
+        "symbol": "v_0",
+        "name": "初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "a",
+        "name": "加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "t",
+        "name": "时间",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "x = v_0t + at^2",
+        "why": "漏掉了二次项前的系数 1/2，这是最常见的系数错误。"
+      },
+      {
+        "wrong": "x = \\frac{1}{2}at^2",
+        "why": "该式只适用于初速度为零的情形。"
+      }
+    ],
+    "relatedIds": [
+      "velocity_time",
+      "velocity_displacement",
+      "acceleration_definition"
+    ],
+    "orderIndex": 2
+  },
+  {
+    "id": "velocity_displacement",
+    "title": "速度与位移的关系式",
+    "module": "mechanics",
+    "chapter": "匀变速直线运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "v^2 - v_0^2 = 2ax",
+    "conditions": "加速度恒定的直线运动，且问题不涉及时间。x 是位移，a、v₀、v 均按同一正方向取符号。",
+    "variables": [
+      {
+        "symbol": "v",
+        "name": "末速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_0",
+        "name": "初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "a",
+        "name": "加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "x",
+        "name": "位移",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "v^2 - v_0^2 = ax",
+        "why": "系数应为 2a；可由 v = v₀ + at 与 x = v₀t + ½at² 联立消去 t 得到。"
+      },
+      {
+        "wrong": "v - v_0 = 2ax",
+        "why": "速度的平方差才等于 2ax，不能把平方差写成一次差。"
+      }
+    ],
+    "relatedIds": [
+      "velocity_time",
+      "displacement_time",
+      "work_energy"
+    ],
+    "orderIndex": 3
+  },
+  {
+    "id": "newton_second",
+    "title": "牛顿第二定律",
+    "module": "mechanics",
+    "chapter": "牛顿运动定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F_{\\text{合}} = ma",
+    "conditions": "惯性参考系中的宏观、低速物体。F合 是物体所受所有外力的合力，a 与 F合 同向；可对某一方向单独列式。",
+    "variables": [
+      {
+        "symbol": "F_{\text{合}}",
+        "name": "合外力",
+        "unit": "N"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "a",
+        "name": "加速度",
+        "unit": "m/s²"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = ma",
+        "why": "F 必须是合外力，不能把某一个分力直接代入。"
+      },
+      {
+        "wrong": "F_{\\text{合}} = \\frac{a}{m}",
+        "why": "加速度与合力成正比、与质量成反比，应是 F合 = ma。"
+      }
+    ],
+    "relatedIds": [
+      "gravity",
+      "friction",
+      "work_energy"
+    ],
+    "orderIndex": 4
+  },
+  {
+    "id": "gravity",
+    "title": "重力的计算式",
+    "module": "mechanics",
+    "chapter": "相互作用——力",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "G = mg",
+    "conditions": "在地面附近或某天体表面附近，g 为该处的重力加速度。G 是重力大小，方向竖直向下。",
+    "variables": [
+      {
+        "symbol": "G",
+        "name": "重力",
+        "unit": "N"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "g",
+        "name": "重力加速度",
+        "unit": "m/s²"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "G = \\frac{m}{g}",
+        "why": "重力与质量成正比，应乘以 g，而不是除以 g。"
+      },
+      {
+        "wrong": "G = mgh",
+        "why": "mgh 是重力势能（焦耳），不是重力。"
+      }
+    ],
+    "relatedIds": [
+      "newton_second",
+      "hooke",
+      "gravitational_potential"
+    ],
+    "orderIndex": 5
+  },
+  {
+    "id": "hooke",
+    "title": "胡克定律",
+    "module": "mechanics",
+    "chapter": "相互作用——力",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F = kx",
+    "conditions": "弹簧在弹性限度内发生形变。x 是形变量（伸长量或压缩量），不是弹簧的总长度；k 为弹簧的劲度系数。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "弹力",
+        "unit": "N"
+      },
+      {
+        "symbol": "k",
+        "name": "劲度系数",
+        "unit": "N/m"
+      },
+      {
+        "symbol": "x",
+        "name": "形变量",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = kl",
+        "why": "胡克定律中的 x 是形变量，不是弹簧的总长度；应写成 F = kΔl。"
+      },
+      {
+        "wrong": "F = \\frac{k}{x}",
+        "why": "弹力与形变量成正比，应相乘。"
+      }
+    ],
+    "relatedIds": [
+      "friction",
+      "gravity",
+      "newton_second"
+    ],
+    "orderIndex": 6
+  },
+  {
+    "id": "friction",
+    "title": "滑动摩擦力公式",
+    "module": "mechanics",
+    "chapter": "相互作用——力",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "f = \\mu N",
+    "conditions": "物体间发生相对滑动。N 是接触面间的正压力，不一定等于重力；μ 为动摩擦因数，由接触面材料和粗糙程度决定。",
+    "variables": [
+      {
+        "symbol": "f",
+        "name": "滑动摩擦力",
+        "unit": "N"
+      },
+      {
+        "symbol": "\\mu",
+        "name": "动摩擦因数",
+        "unit": "无单位"
+      },
+      {
+        "symbol": "N",
+        "name": "正压力",
+        "unit": "N"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "f = \\mu mg",
+        "why": "只有当接触面水平且没有其他竖直方向的力时，N 才等于 mg。"
+      },
+      {
+        "wrong": "f = \\frac{\\mu}{N}",
+        "why": "滑动摩擦力与正压力成正比，应相乘而不是相除；静摩擦也不能直接用该式计算。"
+      }
+    ],
+    "relatedIds": [
+      "hooke",
+      "newton_second",
+      "gravity"
+    ],
+    "orderIndex": 7
+  },
+  {
+    "id": "projectile_x",
+    "title": "平抛运动水平方向位移",
+    "module": "mechanics",
+    "chapter": "抛体运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "x = v_0t",
+    "conditions": "平抛运动，初速度水平，水平方向不受力（忽略空气阻力），做匀速直线运动。",
+    "variables": [
+      {
+        "symbol": "x",
+        "name": "水平位移",
+        "unit": "m"
+      },
+      {
+        "symbol": "v_0",
+        "name": "初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "t",
+        "name": "运动时间",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "x = v_0t + \\frac{1}{2}gt^2",
+        "why": "水平方向没有加速度，不能把竖直方向的 ½gt² 加到水平位移上。"
+      },
+      {
+        "wrong": "x = v_0",
+        "why": "水平位移等于速度乘时间，不是速度本身。"
+      }
+    ],
+    "relatedIds": [
+      "projectile_y",
+      "projectile_speed",
+      "circular_speed"
+    ],
+    "orderIndex": 8
+  },
+  {
+    "id": "projectile_y",
+    "title": "平抛运动竖直方向位移",
+    "module": "mechanics",
+    "chapter": "抛体运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "y = \\frac{1}{2}gt^2",
+    "conditions": "平抛运动，竖直方向初速度为零，只受重力，做自由落体运动。y 是竖直下落高度。",
+    "variables": [
+      {
+        "symbol": "y",
+        "name": "竖直下落高度",
+        "unit": "m"
+      },
+      {
+        "symbol": "g",
+        "name": "重力加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "t",
+        "name": "运动时间",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "y = gt^2",
+        "why": "自由落体位移含系数 1/2，不能漏掉。"
+      },
+      {
+        "wrong": "y = v_0t",
+        "why": "竖直方向初速度为零，不能用水平初速度计算下落高度。"
+      }
+    ],
+    "relatedIds": [
+      "projectile_x",
+      "projectile_speed",
+      "gravity"
+    ],
+    "orderIndex": 9
+  },
+  {
+    "id": "projectile_speed",
+    "title": "平抛运动的合速度",
+    "module": "mechanics",
+    "chapter": "抛体运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "v = \\sqrt{v_x^2 + v_y^2}",
+    "conditions": "平抛运动某时刻的合速度大小。vₓ = v₀ 保持不变，v_y = gt，两个分速度方向互相垂直。",
+    "variables": [
+      {
+        "symbol": "v",
+        "name": "合速度大小",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_x",
+        "name": "水平分速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_y",
+        "name": "竖直分速度",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "v = v_x + v_y",
+        "why": "两个分速度互相垂直，应求矢量和的大小，不能直接相加。"
+      },
+      {
+        "wrong": "v = \\sqrt{v_x^2 - v_y^2}",
+        "why": "勾股定理中是平方和，不是平方差。"
+      }
+    ],
+    "relatedIds": [
+      "projectile_x",
+      "projectile_y",
+      "centripetal_accel"
+    ],
+    "orderIndex": 10
+  },
+  {
+    "id": "circular_speed",
+    "title": "匀速圆周运动的线速度",
+    "module": "mechanics",
+    "chapter": "圆周运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "v = \\frac{2\\pi r}{T}",
+    "conditions": "匀速圆周运动。r 为轨迹半径，T 为转过一整圈所用的周期；v 是线速度大小（速率）。",
+    "variables": [
+      {
+        "symbol": "v",
+        "name": "线速度大小",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "r",
+        "name": "轨道半径",
+        "unit": "m"
+      },
+      {
+        "symbol": "T",
+        "name": "周期",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "v = \\frac{\\pi r}{T}",
+        "why": "转过一整圈的路程是 2πr，不是 πr。"
+      },
+      {
+        "wrong": "v = \\omega r^2",
+        "why": "线速度与角速度的关系是 v = ωr。"
+      }
+    ],
+    "relatedIds": [
+      "angular_speed",
+      "centripetal_accel",
+      "centripetal_force"
+    ],
+    "orderIndex": 11
+  },
+  {
+    "id": "angular_speed",
+    "title": "匀速圆周运动的角速度",
+    "module": "mechanics",
+    "chapter": "圆周运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\omega = \\frac{2\\pi}{T}",
+    "conditions": "匀速圆周运动。ω 的单位是 rad/s，T 为转过一整圈的周期。",
+    "variables": [
+      {
+        "symbol": "\\omega",
+        "name": "角速度",
+        "unit": "rad/s"
+      },
+      {
+        "symbol": "T",
+        "name": "周期",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\omega = \\frac{T}{2\\pi}",
+        "why": "角速度与周期成反比，应把 2π 除以 T。"
+      },
+      {
+        "wrong": "\\omega = 2\\pi T",
+        "why": "频率关系是 ω = 2πf = 2π/T，不能乘以周期。"
+      }
+    ],
+    "relatedIds": [
+      "circular_speed",
+      "centripetal_accel",
+      "peak_emf"
+    ],
+    "orderIndex": 12
+  },
+  {
+    "id": "centripetal_accel",
+    "title": "向心加速度",
+    "module": "mechanics",
+    "chapter": "圆周运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "a = \\frac{v^2}{r} = \\omega^2r = \\frac{4\\pi^2r}{T^2}",
+    "conditions": "匀速圆周运动。a 的方向始终指向圆心；三个表达式在匀速圆周运动中等价。",
+    "variables": [
+      {
+        "symbol": "a",
+        "name": "向心加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "v",
+        "name": "线速度大小",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "r",
+        "name": "半径",
+        "unit": "m"
+      },
+      {
+        "symbol": "\\omega",
+        "name": "角速度",
+        "unit": "rad/s"
+      },
+      {
+        "symbol": "T",
+        "name": "周期",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "a = \\frac{v^2}{r^2}",
+        "why": "向心加速度的分母是半径 r，不是 r²。"
+      },
+      {
+        "wrong": "a = \\omega r",
+        "why": "由 v = ωr 代入 v²/r 得 a = ω²r，不是 ωr。"
+      }
+    ],
+    "relatedIds": [
+      "centripetal_force",
+      "circular_speed",
+      "angular_speed"
+    ],
+    "orderIndex": 13
+  },
+  {
+    "id": "centripetal_force",
+    "title": "向心力公式",
+    "module": "mechanics",
+    "chapter": "圆周运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F = m\\frac{v^2}{r} = m\\omega^2r",
+    "conditions": "物体做匀速圆周运动时，沿半径指向圆心的合外力提供向心力。F 不是新增的性质力，而是某个实际力或它们的合力。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "向心力",
+        "unit": "N"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "v",
+        "name": "线速度大小",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "r",
+        "name": "半径",
+        "unit": "m"
+      },
+      {
+        "symbol": "\\omega",
+        "name": "角速度",
+        "unit": "rad/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = mg + m\\frac{v^2}{r}",
+        "why": "向心力是合外力的径向分量，不能把重力无条件再加一次。"
+      },
+      {
+        "wrong": "F = \\frac{mv^2}{r^2}",
+        "why": "分母应为 r，不是 r²。"
+      }
+    ],
+    "relatedIds": [
+      "centripetal_accel",
+      "universal_grav",
+      "circular_speed"
+    ],
+    "orderIndex": 14
+  },
+  {
+    "id": "universal_grav",
+    "title": "万有引力定律",
+    "module": "mechanics",
+    "chapter": "万有引力与宇宙航行",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F = G\\frac{m_1m_2}{r^2}",
+    "conditions": "两个质点之间，或两个质量分布均匀的球体之间。r 是两球心间的距离，不是表面间距；G 为引力常量。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "万有引力",
+        "unit": "N"
+      },
+      {
+        "symbol": "G",
+        "name": "引力常量",
+        "unit": "N·m²/kg²"
+      },
+      {
+        "symbol": "m_1",
+        "name": "物体 1 的质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "m_2",
+        "name": "物体 2 的质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "r",
+        "name": "球心距",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = G\\frac{m_1m_2}{r}",
+        "why": "万有引力与距离的平方成反比，分母是 r²。"
+      },
+      {
+        "wrong": "F = G m_1m_2 r^2",
+        "why": "万有引力与距离的平方成反比，应除以 r²，而不是乘以 r²。"
+      }
+    ],
+    "relatedIds": [
+      "golden_substitution",
+      "orbital_speed",
+      "orbital_period"
+    ],
+    "orderIndex": 15
+  },
+  {
+    "id": "golden_substitution",
+    "title": "黄金代换式",
+    "module": "mechanics",
+    "chapter": "万有引力与宇宙航行",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "GM = gR^2",
+    "conditions": "在忽略自转的天体表面附近，g 为表面重力加速度，R 为天体半径，M 为天体质量。由万有引力近似等于重力得到。",
+    "variables": [
+      {
+        "symbol": "G",
+        "name": "引力常量",
+        "unit": "N·m²/kg²"
+      },
+      {
+        "symbol": "M",
+        "name": "中心天体质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "g",
+        "name": "表面重力加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "R",
+        "name": "天体半径",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "GM = gR",
+        "why": "重力加速度乘半径的平方，量纲才与 GM 一致。"
+      },
+      {
+        "wrong": "GM = gh",
+        "why": "h 不是天体半径；该式中的 R 必须是中心天体半径。"
+      }
+    ],
+    "relatedIds": [
+      "universal_grav",
+      "orbital_speed",
+      "orbital_period"
+    ],
+    "orderIndex": 16
+  },
+  {
+    "id": "orbital_speed",
+    "title": "圆轨道卫星的环绕速度",
+    "module": "mechanics",
+    "chapter": "万有引力与宇宙航行",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "v = \\sqrt{\\frac{GM}{r}}",
+    "conditions": "卫星绕中心天体做匀速圆周运动，万有引力提供向心力。r 是轨道半径（中心天体半径加高度），不是天体半径。",
+    "variables": [
+      {
+        "symbol": "v",
+        "name": "环绕速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "G",
+        "name": "引力常量",
+        "unit": "N·m²/kg²"
+      },
+      {
+        "symbol": "M",
+        "name": "中心天体质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "r",
+        "name": "轨道半径",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "v = \\sqrt{\\frac{GM}{R}}",
+        "why": "只有贴近天体表面的轨道才有 r ≈ R；一般轨道应用轨道半径 r。"
+      },
+      {
+        "wrong": "v = \\frac{GM}{r}",
+        "why": "由 GMm/r² = mv²/r 可得 v² = GM/r，速度应取平方根。"
+      }
+    ],
+    "relatedIds": [
+      "orbital_period",
+      "universal_grav",
+      "centripetal_force"
+    ],
+    "orderIndex": 17
+  },
+  {
+    "id": "orbital_period",
+    "title": "圆轨道卫星的运行周期",
+    "module": "mechanics",
+    "chapter": "万有引力与宇宙航行",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "T = 2\\pi\\sqrt{\\frac{r^3}{GM}}",
+    "conditions": "卫星绕中心天体做匀速圆周运动。r 为轨道半径，M 为中心天体质量；周期与卫星自身质量无关。",
+    "variables": [
+      {
+        "symbol": "T",
+        "name": "运行周期",
+        "unit": "s"
+      },
+      {
+        "symbol": "r",
+        "name": "轨道半径",
+        "unit": "m"
+      },
+      {
+        "symbol": "G",
+        "name": "引力常量",
+        "unit": "N·m²/kg²"
+      },
+      {
+        "symbol": "M",
+        "name": "中心天体质量",
+        "unit": "kg"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "T = 2\\pi\\sqrt{\\frac{r}{GM}}",
+        "why": "由 GMm/r² = m(4π²/T²)r 得 T² ∝ r³，根号内应是 r³。"
+      },
+      {
+        "wrong": "T = 2\\pi\\sqrt{\\frac{GM}{r^3}}",
+        "why": "轨道半径越大周期越长，GM 应在分母。"
+      }
+    ],
+    "relatedIds": [
+      "orbital_speed",
+      "kepler_third",
+      "universal_grav"
+    ],
+    "orderIndex": 18
+  },
+  {
+    "id": "kepler_third",
+    "title": "开普勒第三定律",
+    "module": "mechanics",
+    "chapter": "万有引力与宇宙航行",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\frac{r^3}{T^2} = k",
+    "conditions": "围绕同一中心天体运动的行星或卫星。r 为椭圆轨道的半长轴（圆轨道即半径），k 只与中心天体质量有关。",
+    "variables": [
+      {
+        "symbol": "r",
+        "name": "轨道半长轴",
+        "unit": "m"
+      },
+      {
+        "symbol": "T",
+        "name": "公转周期",
+        "unit": "s"
+      },
+      {
+        "symbol": "k",
+        "name": "开普勒常量",
+        "unit": "m³/s²"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\frac{r^2}{T^3} = k",
+        "why": "开普勒第三定律是 r³/T² 为常量，指数不能写反。"
+      },
+      {
+        "wrong": "\\frac{r^3}{T^2} = GM",
+        "why": "圆轨道情形下应为 r³/T² = GM/(4π²)，不能漏掉 4π²。"
+      }
+    ],
+    "relatedIds": [
+      "orbital_period",
+      "orbital_speed",
+      "universal_grav"
+    ],
+    "orderIndex": 19
+  },
+  {
+    "id": "work",
+    "title": "恒力做功",
+    "module": "mechanics",
+    "chapter": "机械能守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "W = Fl\\cos\\theta",
+    "conditions": "力 F 为恒力，l 为物体位移大小，θ 为力与位移方向的夹角。W 是标量，正负由 cosθ 决定。",
+    "variables": [
+      {
+        "symbol": "W",
+        "name": "功",
+        "unit": "J"
+      },
+      {
+        "symbol": "F",
+        "name": "恒力",
+        "unit": "N"
+      },
+      {
+        "symbol": "l",
+        "name": "位移大小",
+        "unit": "m"
+      },
+      {
+        "symbol": "\\theta",
+        "name": "力与位移夹角",
+        "unit": "rad 或 °"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "W = Fl\\sin\\theta",
+        "why": "功是力在位移方向上的分量与位移的乘积，应取 cosθ。"
+      },
+      {
+        "wrong": "W = F l",
+        "why": "只有力与位移同向时才能省略 cosθ；夹角为钝角时功为负。"
+      }
+    ],
+    "relatedIds": [
+      "power",
+      "kinetic_energy",
+      "work_energy"
+    ],
+    "orderIndex": 20
+  },
+  {
+    "id": "power",
+    "title": "功率",
+    "module": "mechanics",
+    "chapter": "机械能守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "P = \\frac{W}{t} = Fv\\cos\\theta",
+    "conditions": "P = W/t 求平均功率；P = Fv cosθ 中 v 取平均速度时得平均功率，取瞬时速度时得瞬时功率。θ 为力与速度的夹角。",
+    "variables": [
+      {
+        "symbol": "P",
+        "name": "功率",
+        "unit": "W"
+      },
+      {
+        "symbol": "W",
+        "name": "功",
+        "unit": "J"
+      },
+      {
+        "symbol": "t",
+        "name": "时间",
+        "unit": "s"
+      },
+      {
+        "symbol": "F",
+        "name": "力",
+        "unit": "N"
+      },
+      {
+        "symbol": "v",
+        "name": "速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "\\theta",
+        "name": "力与速度夹角",
+        "unit": "rad 或 °"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "P = Fv",
+        "why": "只有力与速度同向时才能写成 P = Fv；一般情形还要乘 cosθ。"
+      },
+      {
+        "wrong": "P = \\frac{t}{W}",
+        "why": "功率是做功与时间的比值，不是时间除以功。"
+      }
+    ],
+    "relatedIds": [
+      "work",
+      "kinetic_energy",
+      "gravitational_potential"
+    ],
+    "orderIndex": 21
+  },
+  {
+    "id": "kinetic_energy",
+    "title": "动能",
+    "module": "mechanics",
+    "chapter": "机械能守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_k = \\frac{1}{2}mv^2",
+    "conditions": "经典力学范围内，v 为物体相对所选惯性参考系的速度大小。动能是标量，始终非负。",
+    "variables": [
+      {
+        "symbol": "E_k",
+        "name": "动能",
+        "unit": "J"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "v",
+        "name": "速度大小",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_k = mv^2",
+        "why": "动能公式含系数 1/2，不能漏掉。"
+      },
+      {
+        "wrong": "E_k = \\frac{1}{2}mv",
+        "why": "速度应取平方，量纲才是焦耳。"
+      }
+    ],
+    "relatedIds": [
+      "work_energy",
+      "power",
+      "momentum"
+    ],
+    "orderIndex": 22
+  },
+  {
+    "id": "work_energy",
+    "title": "动能定理",
+    "module": "mechanics",
+    "chapter": "机械能守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "W_{\\text{合}} = \\Delta E_k",
+    "conditions": "惯性参考系中，W合 是物体所受所有力做功的代数和，ΔEk 是末动能减初动能。适用于恒力、变力、直线和曲线运动。",
+    "variables": [
+      {
+        "symbol": "W_{\text{合}}",
+        "name": "合外力做的总功",
+        "unit": "J"
+      },
+      {
+        "symbol": "\\Delta E_k",
+        "name": "动能变化量",
+        "unit": "J"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "W_{\\text{合}} = E_k",
+        "why": "动能定理给出的是动能的变化量，不是末动能本身。"
+      },
+      {
+        "wrong": "W_G = \\Delta E_k",
+        "why": "只有重力做功时，合功等于重力功；一般情况下还要计入其他力做的功。"
+      }
+    ],
+    "relatedIds": [
+      "kinetic_energy",
+      "work",
+      "energy_conservation"
+    ],
+    "orderIndex": 23
+  },
+  {
+    "id": "gravitational_potential",
+    "title": "重力势能",
+    "module": "mechanics",
+    "chapter": "机械能守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_p = mgh",
+    "conditions": "地面附近，g 近似恒定。h 是物体相对所选零势能面的高度；重力势能的值与零势能面的选择有关。",
+    "variables": [
+      {
+        "symbol": "E_p",
+        "name": "重力势能",
+        "unit": "J"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "g",
+        "name": "重力加速度",
+        "unit": "m/s²"
+      },
+      {
+        "symbol": "h",
+        "name": "相对零势能面的高度",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_p = mgh^2",
+        "why": "高度 h 只是一次方，量纲才与能量一致。"
+      },
+      {
+        "wrong": "E_p = mg",
+        "why": "mgh 才具有能量量纲，mg 是重力大小。"
+      }
+    ],
+    "relatedIds": [
+      "gravity",
+      "energy_conservation",
+      "work"
+    ],
+    "orderIndex": 24
+  },
+  {
+    "id": "energy_conservation",
+    "title": "机械能守恒定律",
+    "module": "mechanics",
+    "chapter": "机械能守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_{k1} + E_{p1} = E_{k2} + E_{p2}",
+    "conditions": "系统内只有重力或弹簧弹力做功，其他力不做功或做功为零；或系统与外界没有机械能交换。可选取合适的零势能面。",
+    "variables": [
+      {
+        "symbol": "E_{k1}",
+        "name": "初动能",
+        "unit": "J"
+      },
+      {
+        "symbol": "E_{p1}",
+        "name": "初势能",
+        "unit": "J"
+      },
+      {
+        "symbol": "E_{k2}",
+        "name": "末动能",
+        "unit": "J"
+      },
+      {
+        "symbol": "E_{p2}",
+        "name": "末势能",
+        "unit": "J"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_{k1} + E_{p1} = E_{k2} - E_{p2}",
+        "why": "末势能应与末动能相加；机械能守恒式两边的势能符号不能写反。"
+      },
+      {
+        "wrong": "E_{k1} = E_{k2}",
+        "why": "有重力或弹力做功时动能会变化，不能把机械能守恒误当成动能守恒。"
+      }
+    ],
+    "relatedIds": [
+      "gravitational_potential",
+      "kinetic_energy",
+      "work_energy"
+    ],
+    "orderIndex": 25
+  },
+  {
+    "id": "momentum",
+    "title": "动量",
+    "module": "mechanics",
+    "chapter": "动量守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "p = mv",
+    "conditions": "v 为物体相对所选惯性参考系的速度，p 与 v 同向。动量是矢量，比较动量时必须先规定正方向。",
+    "variables": [
+      {
+        "symbol": "p",
+        "name": "动量",
+        "unit": "kg·m/s"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "v",
+        "name": "速度",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "p = \\frac{1}{2}mv^2",
+        "why": "这是动能，不是动量；动量与速度一次方成正比。"
+      },
+      {
+        "wrong": "p = m v^2",
+        "why": "动量应等于质量乘速度，不含平方。"
+      }
+    ],
+    "relatedIds": [
+      "impulse",
+      "momentum_conservation",
+      "kinetic_energy"
+    ],
+    "orderIndex": 26
+  },
+  {
+    "id": "impulse",
+    "title": "动量定理",
+    "module": "mechanics",
+    "chapter": "动量守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F\\Delta t = \\Delta p",
+    "conditions": "F 为物体所受合外力（恒力或时间内的平均力），Δt 为作用时间，Δp 为末动量减初动量。各量均为矢量，需规定正方向。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "合外力（或平均力）",
+        "unit": "N"
+      },
+      {
+        "symbol": "\\Delta t",
+        "name": "作用时间",
+        "unit": "s"
+      },
+      {
+        "symbol": "\\Delta p",
+        "name": "动量变化量",
+        "unit": "kg·m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F\\Delta t = p",
+        "why": "冲量等于动量的变化量，而不是末动量本身。"
+      },
+      {
+        "wrong": "F = \\Delta p",
+        "why": "冲量是力与作用时间的乘积，缺少 Δt 会使量纲错误。"
+      }
+    ],
+    "relatedIds": [
+      "momentum",
+      "momentum_conservation",
+      "newton_second"
+    ],
+    "orderIndex": 27
+  },
+  {
+    "id": "momentum_conservation",
+    "title": "动量守恒定律",
+    "module": "mechanics",
+    "chapter": "动量守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "m_1v_1 + m_2v_2 = m_1v_1' + m_2v_2'",
+    "conditions": "系统所受合外力为零，或内力远大于外力可近似守恒。动量是矢量，必须先规定正方向，各速度带符号代入。",
+    "variables": [
+      {
+        "symbol": "m_1",
+        "name": "物体 1 质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "m_2",
+        "name": "物体 2 质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "v_1",
+        "name": "物体 1 初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_2",
+        "name": "物体 2 初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_1'",
+        "name": "物体 1 末速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_2'",
+        "name": "物体 2 末速度",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "m_1v_1 + m_2v_2 = (m_1 + m_2)v",
+        "why": "只有完全非弹性碰撞且碰后共速时才能这样写；一般碰撞碰后速度不同。"
+      },
+      {
+        "wrong": "m_1v_1 = m_2v_2'",
+        "why": "必须同时考虑系统内所有物体的初、末动量。"
+      }
+    ],
+    "relatedIds": [
+      "inelastic_collision",
+      "impulse",
+      "momentum"
+    ],
+    "orderIndex": 28
+  },
+  {
+    "id": "inelastic_collision",
+    "title": "完全非弹性碰撞",
+    "module": "mechanics",
+    "chapter": "动量守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "m_1v_1 + m_2v_2 = (m_1 + m_2)v",
+    "conditions": "两物体发生完全非弹性碰撞，碰后粘在一起以共同速度 v 运动。系统动量守恒，但机械能有损失。",
+    "variables": [
+      {
+        "symbol": "m_1",
+        "name": "物体 1 质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "m_2",
+        "name": "物体 2 质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "v_1",
+        "name": "物体 1 初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v_2",
+        "name": "物体 2 初速度",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v",
+        "name": "碰后共同速度",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "m_1v_1 + m_2v_2 = m_1v_1' + m_2v_2'",
+        "why": "该式是一般动量守恒；完全非弹性碰撞的特征是碰后共速，应写成 (m₁+m₂)v。"
+      },
+      {
+        "wrong": "\\frac{1}{2}m_1v_1^2 + \\frac{1}{2}m_2v_2^2 = \\frac{1}{2}(m_1+m_2)v^2",
+        "why": "完全非弹性碰撞机械能不守恒，不能这样列能量等式。"
+      }
+    ],
+    "relatedIds": [
+      "momentum_conservation",
+      "momentum",
+      "energy_conservation"
+    ],
+    "orderIndex": 29
+  },
+  {
+    "id": "linear_angular",
+    "title": "线速度与角速度的关系",
+    "module": "mechanics",
+    "chapter": "圆周运动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "v = \\omega r",
+    "conditions": "质点做圆周运动，r 为轨迹半径，ω 取 rad/s，v 为线速度大小。",
+    "variables": [
+      {
+        "symbol": "v",
+        "name": "线速度大小",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "\\omega",
+        "name": "角速度",
+        "unit": "rad/s"
+      },
+      {
+        "symbol": "r",
+        "name": "半径",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "v = \\frac{\\omega}{r}",
+        "why": "线速度与角速度成正比，应相乘而不是相除。"
+      },
+      {
+        "wrong": "v = \\omega r^2",
+        "why": "半径只取一次方，量纲才是 m/s。"
+      }
+    ],
+    "relatedIds": [
+      "circular_speed",
+      "angular_speed",
+      "centripetal_accel"
+    ],
+    "orderIndex": 30
+  },
+  {
+    "id": "elastic_potential",
+    "title": "弹簧的弹性势能",
+    "module": "mechanics",
+    "chapter": "机械能守恒定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_p = \\frac{1}{2}kx^2",
+    "conditions": "弹簧在弹性限度内发生形变。x 是形变量（不是弹簧总长度），k 为劲度系数；弹性势能的值与零势能位置的选择有关。",
+    "variables": [
+      {
+        "symbol": "E_p",
+        "name": "弹性势能",
+        "unit": "J"
+      },
+      {
+        "symbol": "k",
+        "name": "劲度系数",
+        "unit": "N/m"
+      },
+      {
+        "symbol": "x",
+        "name": "形变量",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_p = kx",
+        "why": "弹性势能与形变量的平方成正比，且含系数 1/2。"
+      },
+      {
+        "wrong": "E_p = \\frac{1}{2}kx",
+        "why": "形变量应取平方，量纲才是焦耳。"
+      }
+    ],
+    "relatedIds": [
+      "hooke",
+      "energy_conservation",
+      "gravitational_potential"
+    ],
+    "orderIndex": 31
+  },
+  {
+    "id": "shm_restoring",
+    "title": "简谐运动的回复力",
+    "module": "waves",
+    "chapter": "机械振动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F = -kx",
+    "conditions": "物体做简谐运动，x 是物体相对平衡位置的位移，k 是回复力系数（对弹簧振子等于弹簧劲度系数）。负号表示回复力方向总与位移方向相反。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "回复力",
+        "unit": "N"
+      },
+      {
+        "symbol": "k",
+        "name": "回复力系数",
+        "unit": "N/m"
+      },
+      {
+        "symbol": "x",
+        "name": "相对平衡位置的位移",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = kx",
+        "why": "回复力方向与位移方向相反，负号不能漏掉。"
+      },
+      {
+        "wrong": "F = -kx^2",
+        "why": "简谐运动的回复力与位移一次方成正比，不是平方。"
+      }
+    ],
+    "relatedIds": [
+      "shm_displacement",
+      "pendulum",
+      "hooke"
+    ],
+    "orderIndex": 32
+  },
+  {
+    "id": "shm_displacement",
+    "title": "简谐运动的位移表达式",
+    "module": "waves",
+    "chapter": "机械振动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "x = A\\sin(\\omega t + \\varphi)",
+    "conditions": "简谐运动，x 为相对平衡位置的位移，A 为振幅，ω 为圆频率，φ 为初相位。t = 0 时的位移由 A sinφ 决定。",
+    "variables": [
+      {
+        "symbol": "x",
+        "name": "相对平衡位置的位移",
+        "unit": "m"
+      },
+      {
+        "symbol": "A",
+        "name": "振幅",
+        "unit": "m"
+      },
+      {
+        "symbol": "\\omega",
+        "name": "圆频率",
+        "unit": "rad/s"
+      },
+      {
+        "symbol": "t",
+        "name": "时间",
+        "unit": "s"
+      },
+      {
+        "symbol": "\\varphi",
+        "name": "初相位",
+        "unit": "rad"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "x = A\\sin(\\omega t)\\cos\\varphi",
+        "why": "sin(ωt+φ) 不能拆成 sin(ωt)·cosφ，还缺少 cos(ωt)·sinφ 项。"
+      },
+      {
+        "wrong": "x = A\\sin\\omega t",
+        "why": "该式只在初相位 φ = 0 时成立，不能忽略一般初相位。"
+      }
+    ],
+    "relatedIds": [
+      "shm_restoring",
+      "pendulum",
+      "angular_speed"
+    ],
+    "orderIndex": 33
+  },
+  {
+    "id": "pendulum",
+    "title": "单摆的周期",
+    "module": "waves",
+    "chapter": "机械振动",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "T = 2\\pi\\sqrt{\\frac{l}{g}}",
+    "conditions": "单摆做小角度摆动（一般小于 5°），摆长 l 为悬点到摆球球心的距离，g 为当地重力加速度。周期与摆球质量无关。",
+    "variables": [
+      {
+        "symbol": "T",
+        "name": "周期",
+        "unit": "s"
+      },
+      {
+        "symbol": "l",
+        "name": "摆长",
+        "unit": "m"
+      },
+      {
+        "symbol": "g",
+        "name": "重力加速度",
+        "unit": "m/s²"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "T = 2\\pi\\sqrt{\\frac{g}{l}}",
+        "why": "摆长越长周期越大，l 应在分子、g 在分母。"
+      },
+      {
+        "wrong": "T = 2\\pi\\sqrt{\\frac{m}{k}}",
+        "why": "这是弹簧振子的周期公式；单摆周期与摆球质量无关。"
+      }
+    ],
+    "relatedIds": [
+      "shm_displacement",
+      "shm_restoring",
+      "gravity"
+    ],
+    "orderIndex": 34
+  },
+  {
+    "id": "wave_speed",
+    "title": "波速、波长与频率的关系",
+    "module": "waves",
+    "chapter": "机械波",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "v = \\lambda f = \\frac{\\lambda}{T}",
+    "conditions": "机械波或电磁波的传播。v 由介质决定，f 由波源决定；λ 是一个周期内波传播的距离，T 为周期。",
+    "variables": [
+      {
+        "symbol": "v",
+        "name": "波速",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "\\lambda",
+        "name": "波长",
+        "unit": "m"
+      },
+      {
+        "symbol": "f",
+        "name": "频率",
+        "unit": "Hz"
+      },
+      {
+        "symbol": "T",
+        "name": "周期",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "v = \\lambda T",
+        "why": "波速等于波长除以周期，不是波长乘周期。"
+      },
+      {
+        "wrong": "v = \\frac{f}{\\lambda}",
+        "why": "由 v = λf 可得 λ = v/f，不能把 f 放在分子。"
+      }
+    ],
+    "relatedIds": [
+      "pendulum",
+      "shm_displacement",
+      "angular_speed"
+    ],
+    "orderIndex": 35
+  },
+  {
+    "id": "first_law",
+    "title": "热力学第一定律",
+    "module": "thermal",
+    "chapter": "热力学定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\Delta U = Q + W",
+    "conditions": "人教版约定：Q 为系统吸收的热量（吸热为正），W 为外界对系统做的功（外界对系统做功为正），ΔU 为内能变化量。",
+    "variables": [
+      {
+        "symbol": "\\Delta U",
+        "name": "内能变化量",
+        "unit": "J"
+      },
+      {
+        "symbol": "Q",
+        "name": "系统吸收的热量",
+        "unit": "J"
+      },
+      {
+        "symbol": "W",
+        "name": "外界对系统做的功",
+        "unit": "J"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\Delta U = Q - W",
+        "why": "在人教版符号约定中，外界对系统做功 W 取正，因此是加号；若把 W 定义为系统对外做功，才写成减号，必须先看清约定。"
+      },
+      {
+        "wrong": "\\Delta U = Q",
+        "why": "只有不做功（W = 0）时内能变化才等于吸收的热量。"
+      }
+    ],
+    "relatedIds": [
+      "ideal_gas",
+      "boyle",
+      "charles"
+    ],
+    "orderIndex": 36
+  },
+  {
+    "id": "ideal_gas",
+    "title": "理想气体状态方程",
+    "module": "thermal",
+    "chapter": "气体、固体和液体",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\frac{p_1V_1}{T_1} = \\frac{p_2V_2}{T_2}",
+    "conditions": "一定质量的理想气体从一个平衡态变到另一个平衡态。T 必须用热力学温度（K），p 用帕、V 用立方米时也可用其他一致单位。",
+    "variables": [
+      {
+        "symbol": "p_1",
+        "name": "初态压强",
+        "unit": "Pa"
+      },
+      {
+        "symbol": "V_1",
+        "name": "初态体积",
+        "unit": "m³"
+      },
+      {
+        "symbol": "T_1",
+        "name": "初态热力学温度",
+        "unit": "K"
+      },
+      {
+        "symbol": "p_2",
+        "name": "末态压强",
+        "unit": "Pa"
+      },
+      {
+        "symbol": "V_2",
+        "name": "末态体积",
+        "unit": "m³"
+      },
+      {
+        "symbol": "T_2",
+        "name": "末态热力学温度",
+        "unit": "K"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "p_1V_1 = p_2V_2",
+        "why": "这是等温过程（玻意耳定律）的特例；温度变化时必须用理想气体状态方程。"
+      },
+      {
+        "wrong": "\\frac{p_1V_1}{t_1} = \\frac{p_2V_2}{t_2}",
+        "why": "温度必须使用热力学温度 K，不能直接代入摄氏度。"
+      }
+    ],
+    "relatedIds": [
+      "boyle",
+      "charles",
+      "gay_lussac"
+    ],
+    "orderIndex": 37
+  },
+  {
+    "id": "boyle",
+    "title": "玻意耳定律",
+    "module": "thermal",
+    "chapter": "气体、固体和液体",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "p_1V_1 = p_2V_2",
+    "conditions": "一定质量的理想气体发生等温变化。温度保持不变，p 与 V 成反比。",
+    "variables": [
+      {
+        "symbol": "p_1",
+        "name": "初态压强",
+        "unit": "Pa"
+      },
+      {
+        "symbol": "V_1",
+        "name": "初态体积",
+        "unit": "m³"
+      },
+      {
+        "symbol": "p_2",
+        "name": "末态压强",
+        "unit": "Pa"
+      },
+      {
+        "symbol": "V_2",
+        "name": "末态体积",
+        "unit": "m³"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "p_1V_1 = \\frac{p_2}{V_2}",
+        "why": "等温过程中 pV 的乘积保持不变，末态体积应乘在 p₂ 上，而不是除以 V₂。"
+      },
+      {
+        "wrong": "\\frac{p_1}{V_1} = \\frac{p_2}{V_2}",
+        "why": "等温下压强与体积成反比，乘积不变，而不是比值不变。"
+      }
+    ],
+    "relatedIds": [
+      "ideal_gas",
+      "charles",
+      "gay_lussac"
+    ],
+    "orderIndex": 38
+  },
+  {
+    "id": "charles",
+    "title": "查理定律",
+    "module": "thermal",
+    "chapter": "气体、固体和液体",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\frac{p_1}{T_1} = \\frac{p_2}{T_2}",
+    "conditions": "一定质量的理想气体发生等容变化。体积保持不变，p 与热力学温度 T 成正比。",
+    "variables": [
+      {
+        "symbol": "p_1",
+        "name": "初态压强",
+        "unit": "Pa"
+      },
+      {
+        "symbol": "T_1",
+        "name": "初态热力学温度",
+        "unit": "K"
+      },
+      {
+        "symbol": "p_2",
+        "name": "末态压强",
+        "unit": "Pa"
+      },
+      {
+        "symbol": "T_2",
+        "name": "末态热力学温度",
+        "unit": "K"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\frac{p_1}{t_1} = \\frac{p_2}{t_2}",
+        "why": "查理定律中的温度必须用热力学温度 K，不能直接代入摄氏度。"
+      },
+      {
+        "wrong": "p_1T_1 = p_2T_2",
+        "why": "等容下压强与热力学温度成正比，比值不变，而不是乘积不变。"
+      }
+    ],
+    "relatedIds": [
+      "ideal_gas",
+      "boyle",
+      "gay_lussac"
+    ],
+    "orderIndex": 39
+  },
+  {
+    "id": "gay_lussac",
+    "title": "盖-吕萨克定律",
+    "module": "thermal",
+    "chapter": "气体、固体和液体",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\frac{V_1}{T_1} = \\frac{V_2}{T_2}",
+    "conditions": "一定质量的理想气体发生等压变化。压强保持不变，V 与热力学温度 T 成正比。",
+    "variables": [
+      {
+        "symbol": "V_1",
+        "name": "初态体积",
+        "unit": "m³"
+      },
+      {
+        "symbol": "T_1",
+        "name": "初态热力学温度",
+        "unit": "K"
+      },
+      {
+        "symbol": "V_2",
+        "name": "末态体积",
+        "unit": "m³"
+      },
+      {
+        "symbol": "T_2",
+        "name": "末态热力学温度",
+        "unit": "K"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\frac{V_1}{t_1} = \\frac{V_2}{t_2}",
+        "why": "必须使用热力学温度 K；用摄氏度代入会得到错误结果。"
+      },
+      {
+        "wrong": "V_1T_1 = V_2T_2",
+        "why": "等压下体积与热力学温度成正比，比值不变，不是乘积不变。"
+      }
+    ],
+    "relatedIds": [
+      "ideal_gas",
+      "boyle",
+      "charles"
+    ],
+    "orderIndex": 40
+  },
+  {
+    "id": "kelvin",
+    "title": "热力学温度与摄氏温度的换算",
+    "module": "thermal",
+    "chapter": "气体、固体和液体",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "T = t + 273.15",
+    "conditions": "T 为热力学温度，单位为开尔文（K）；t 为摄氏温度，单位为摄氏度（℃）。计算中常取 T = t + 273 K。",
+    "variables": [
+      {
+        "symbol": "T",
+        "name": "热力学温度",
+        "unit": "K"
+      },
+      {
+        "symbol": "t",
+        "name": "摄氏温度",
+        "unit": "℃"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "T = t - 273.15",
+        "why": "热力学温度比摄氏温度大 273.15，应加而不是减。"
+      },
+      {
+        "wrong": "T = 273.15 - t",
+        "why": "换算关系是 T = t + 273.15，不能把 t 的符号反过来。"
+      }
+    ],
+    "relatedIds": [
+      "ideal_gas",
+      "charles",
+      "gay_lussac"
+    ],
+    "orderIndex": 41
+  },
+  {
+    "id": "oil_film",
+    "title": "油膜法估测分子直径",
+    "module": "thermal",
+    "chapter": "分子动理论",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "d = \\frac{V}{S}",
+    "conditions": "把油酸分子看成球形并单层紧密排列。V 是一滴油酸酒精溶液中纯油酸的体积（不是溶液总体积），S 是油膜面积。",
+    "variables": [
+      {
+        "symbol": "d",
+        "name": "分子直径",
+        "unit": "m"
+      },
+      {
+        "symbol": "V",
+        "name": "纯油酸体积",
+        "unit": "m³"
+      },
+      {
+        "symbol": "S",
+        "name": "油膜面积",
+        "unit": "m²"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "d = \\frac{S}{V}",
+        "why": "分子直径应等于纯油酸体积除以油膜面积，不能把体积和面积位置颠倒。"
+      },
+      {
+        "wrong": "d = VS",
+        "why": "分子直径应等于体积除以面积，量纲才是长度。"
+      }
+    ],
+    "relatedIds": [
+      "mole_relation",
+      "ideal_gas",
+      "kelvin"
+    ],
+    "orderIndex": 42
+  },
+  {
+    "id": "mole_relation",
+    "title": "物质的量、质量与分子数",
+    "module": "thermal",
+    "chapter": "分子动理论",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "n = \\frac{m}{M} = \\frac{N}{N_A}",
+    "conditions": "n 为物质的量（mol），m 为物质质量，M 为摩尔质量，N 为分子数，N_A 为阿伏加德罗常数（约 6.02×10²³ mol⁻¹）。",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "物质的量",
+        "unit": "mol"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "M",
+        "name": "摩尔质量",
+        "unit": "kg/mol"
+      },
+      {
+        "symbol": "N",
+        "name": "分子数",
+        "unit": "个"
+      },
+      {
+        "symbol": "N_A",
+        "name": "阿伏加德罗常数",
+        "unit": "mol⁻¹"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "n = \\frac{M}{m}",
+        "why": "物质的量等于质量除以摩尔质量，不是摩尔质量除以质量。"
+      },
+      {
+        "wrong": "N = \\frac{n}{N_A}",
+        "why": "分子数应等于物质的量乘阿伏加德罗常数，即 N = nN_A，而不是除以 N_A。"
+      }
+    ],
+    "relatedIds": [
+      "oil_film",
+      "ideal_gas",
+      "kinetic_energy"
+    ],
+    "orderIndex": 43
+  },
+  {
+    "id": "specific_heat",
+    "title": "物质升温吸热的计算",
+    "module": "thermal",
+    "chapter": "热力学定律",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "Q = cm\\Delta t",
+    "conditions": "物质不发生物态变化。c 为比热容，m 为质量，Δt 为温度变化量（末温减初温）；吸热时 Q 为正，放热时为负。",
+    "variables": [
+      {
+        "symbol": "Q",
+        "name": "吸收的热量",
+        "unit": "J"
+      },
+      {
+        "symbol": "c",
+        "name": "比热容",
+        "unit": "J/(kg·℃)"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "\\Delta t",
+        "name": "温度变化量",
+        "unit": "℃"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "Q = \\frac{cm}{\\Delta t}",
+        "why": "热量与温度变化量成正比，应相乘而不是相除。"
+      },
+      {
+        "wrong": "Q = cm",
+        "why": "缺少温度变化量 Δt，量纲也不是能量。"
+      }
+    ],
+    "relatedIds": [
+      "first_law",
+      "ideal_gas",
+      "mole_relation"
+    ],
+    "orderIndex": 44
+  },
+  {
+    "id": "coulomb",
+    "title": "库仑定律",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F = k\\frac{q_1q_2}{r^2}",
+    "conditions": "真空中两个静止点电荷之间的相互作用力。r 为两点电荷间的距离，k 为静电力常量；同种电荷相斥，异种电荷相吸。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "库仑力",
+        "unit": "N"
+      },
+      {
+        "symbol": "k",
+        "name": "静电力常量",
+        "unit": "N·m²/C²"
+      },
+      {
+        "symbol": "q_1",
+        "name": "电荷 1 的电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "q_2",
+        "name": "电荷 2 的电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "r",
+        "name": "两点电荷间距离",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = k\\frac{q_1q_2}{r}",
+        "why": "库仑力与距离的平方成反比，分母应为 r²。"
+      },
+      {
+        "wrong": "F = k\\frac{q_1 + q_2}{r^2}",
+        "why": "库仑力与两电荷量的乘积成正比，不是与它们的和成正比。"
+      }
+    ],
+    "relatedIds": [
+      "field_def",
+      "point_field",
+      "potential_diff"
+    ],
+    "orderIndex": 45
+  },
+  {
+    "id": "field_def",
+    "title": "电场强度的定义式",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E = \\frac{F}{q}",
+    "conditions": "E 由电场本身决定，与放入的试探电荷 q 无关。F 是试探电荷在该点受到的电场力，q 为试探电荷的电荷量（取正值计算大小）。",
+    "variables": [
+      {
+        "symbol": "E",
+        "name": "电场强度",
+        "unit": "N/C"
+      },
+      {
+        "symbol": "F",
+        "name": "电场力",
+        "unit": "N"
+      },
+      {
+        "symbol": "q",
+        "name": "试探电荷电荷量",
+        "unit": "C"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E = \\frac{q}{F}",
+        "why": "电场强度是电场力与电荷量的比值，不是倒数。"
+      },
+      {
+        "wrong": "E = Fq",
+        "why": "电场强度是电场力与电荷量的比值，不是乘积；乘积 Fq 的量纲也不是 N/C。"
+      }
+    ],
+    "relatedIds": [
+      "point_field",
+      "uniform_field",
+      "potential_diff"
+    ],
+    "orderIndex": 46
+  },
+  {
+    "id": "point_field",
+    "title": "点电荷的电场强度",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E = k\\frac{Q}{r^2}",
+    "conditions": "真空中静止点电荷 Q 产生的电场。Q 为场源电荷，r 为到点电荷的距离；E 的方向沿连线，正电荷向外、负电荷向内。",
+    "variables": [
+      {
+        "symbol": "E",
+        "name": "电场强度",
+        "unit": "N/C"
+      },
+      {
+        "symbol": "k",
+        "name": "静电力常量",
+        "unit": "N·m²/C²"
+      },
+      {
+        "symbol": "Q",
+        "name": "场源电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "r",
+        "name": "到点电荷的距离",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E = k\\frac{Q}{r}",
+        "why": "点电荷场强与距离平方成反比，分母是 r²。"
+      },
+      {
+        "wrong": "E = k\\frac{Q^2}{r^2}",
+        "why": "场强与场源电荷量 Q 的一次方成正比，不能把 Q 平方。"
+      }
+    ],
+    "relatedIds": [
+      "field_def",
+      "coulomb",
+      "uniform_field"
+    ],
+    "orderIndex": 47
+  },
+  {
+    "id": "potential_diff",
+    "title": "电势差与电场力做功",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "U_{AB} = \\frac{W_{AB}}{q}",
+    "conditions": "U_AB = φ_A − φ_B，W_AB 为电荷 q 从 A 移到 B 时电场力做的功。q 带符号代入；电场力做正功时，电势能减少。",
+    "variables": [
+      {
+        "symbol": "U_{AB}",
+        "name": "A、B 两点电势差",
+        "unit": "V"
+      },
+      {
+        "symbol": "W_{AB}",
+        "name": "电场力做的功",
+        "unit": "J"
+      },
+      {
+        "symbol": "q",
+        "name": "电荷量",
+        "unit": "C"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "U_{AB} = \\frac{W_{BA}}{q}",
+        "why": "W_AB 是电荷从 A 移到 B 时电场力做的功，下标顺序必须与 U_AB 对应。"
+      },
+      {
+        "wrong": "U_{AB} = \\varphi_B - \\varphi_A",
+        "why": "电势差 U_AB = φ_A − φ_B，不是末减初的反向顺序。"
+      }
+    ],
+    "relatedIds": [
+      "uniform_field",
+      "field_def",
+      "coulomb"
+    ],
+    "orderIndex": 48
+  },
+  {
+    "id": "uniform_field",
+    "title": "匀强电场中电势差与场强的关系",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "U = Ed",
+    "conditions": "匀强电场，d 是沿电场方向两点间的距离。若两点连线与电场方向有夹角，应取连线在电场方向上的投影。",
+    "variables": [
+      {
+        "symbol": "U",
+        "name": "两点间电势差",
+        "unit": "V"
+      },
+      {
+        "symbol": "E",
+        "name": "电场强度",
+        "unit": "V/m"
+      },
+      {
+        "symbol": "d",
+        "name": "沿电场方向的距离",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "U = \\frac{E}{d}",
+        "why": "匀强电场中 U = Ed；电压与沿场强方向的距离成正比，不是除以距离。"
+      },
+      {
+        "wrong": "E = \\frac{d}{U}",
+        "why": "由 U = Ed 得 E = U/d，不是 d/U。"
+      }
+    ],
+    "relatedIds": [
+      "potential_diff",
+      "field_def",
+      "parallel_plate"
+    ],
+    "orderIndex": 49
+  },
+  {
+    "id": "capacitance",
+    "title": "电容的定义式",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "C = \\frac{Q}{U}",
+    "conditions": "C 是电容器本身的属性，由正对面积、板间距和介质决定，与 Q、U 无关。Q 为一个极板所带电荷量的绝对值，U 为两极板间电势差。",
+    "variables": [
+      {
+        "symbol": "C",
+        "name": "电容",
+        "unit": "F"
+      },
+      {
+        "symbol": "Q",
+        "name": "一个极板的电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "U",
+        "name": "两极板间电势差",
+        "unit": "V"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "C = \\frac{U}{Q}",
+        "why": "电容等于电荷量除以电势差，不是电压除以电荷量。"
+      },
+      {
+        "wrong": "C = QU",
+        "why": "电容是电荷量与电压的比值，不是乘积；QU 的量纲是电荷量，不是法拉。"
+      }
+    ],
+    "relatedIds": [
+      "parallel_plate",
+      "uniform_field",
+      "potential_diff"
+    ],
+    "orderIndex": 50
+  },
+  {
+    "id": "parallel_plate",
+    "title": "平行板电容器的电容",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "C = \\frac{\\varepsilon_r S}{4\\pi kd}",
+    "conditions": "平行板电容器，忽略边缘效应。S 为两极板正对面积，d 为板间距离，ε_r 为介质的相对介电常数（真空约为 1）。",
+    "variables": [
+      {
+        "symbol": "C",
+        "name": "电容",
+        "unit": "F"
+      },
+      {
+        "symbol": "\\varepsilon_r",
+        "name": "相对介电常数",
+        "unit": "无单位"
+      },
+      {
+        "symbol": "S",
+        "name": "正对面积",
+        "unit": "m²"
+      },
+      {
+        "symbol": "d",
+        "name": "板间距离",
+        "unit": "m"
+      },
+      {
+        "symbol": "k",
+        "name": "静电力常量",
+        "unit": "N·m²/C²"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "C = \\frac{\\varepsilon_r S}{4\\pi k d^2}",
+        "why": "分母中是板间距离 d 的一次方，不是 d²。"
+      },
+      {
+        "wrong": "C = \\frac{4\\pi kd}{\\varepsilon_r S}",
+        "why": "电容与正对面积成正比、与板间距成反比，分子分母写反会使规律完全相反。"
+      }
+    ],
+    "relatedIds": [
+      "capacitance",
+      "uniform_field",
+      "coulomb"
+    ],
+    "orderIndex": 51
+  },
+  {
+    "id": "ohm",
+    "title": "部分电路欧姆定律",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "I = \\frac{U}{R}",
+    "conditions": "部分电路的纯电阻导电元件（如金属导体、电解液）。U、I、R 必须对应同一段电路，且 R 在该条件下为常数。",
+    "variables": [
+      {
+        "symbol": "I",
+        "name": "电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "U",
+        "name": "该段电路两端电压",
+        "unit": "V"
+      },
+      {
+        "symbol": "R",
+        "name": "该段电路电阻",
+        "unit": "Ω"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "I = UR",
+        "why": "电流等于电压除以电阻，不是乘积。"
+      },
+      {
+        "wrong": "I = \\frac{R}{U}",
+        "why": "电流与电压成正比、与电阻成反比，应写成 U/R，而不是 R/U。"
+      }
+    ],
+    "relatedIds": [
+      "resistance",
+      "closed_ohm",
+      "joule"
+    ],
+    "orderIndex": 52
+  },
+  {
+    "id": "resistance",
+    "title": "电阻定律",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "R = \\rho\\frac{l}{S}",
+    "conditions": "均匀导体，l 为沿电流方向的长度，S 为垂直于电流方向的横截面积，ρ 为材料在所用温度下的电阻率。",
+    "variables": [
+      {
+        "symbol": "R",
+        "name": "电阻",
+        "unit": "Ω"
+      },
+      {
+        "symbol": "\\rho",
+        "name": "电阻率",
+        "unit": "Ω·m"
+      },
+      {
+        "symbol": "l",
+        "name": "导体长度",
+        "unit": "m"
+      },
+      {
+        "symbol": "S",
+        "name": "横截面积",
+        "unit": "m²"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "R = \\rho\\frac{S}{l}",
+        "why": "电阻与长度成正比、与横截面积成反比，l 应在分子、S 在分母。"
+      },
+      {
+        "wrong": "R = \\frac{\\rho l}{S^2}",
+        "why": "电阻与横截面积的一次方成反比，分母不应写成 S²。"
+      }
+    ],
+    "relatedIds": [
+      "ohm",
+      "series",
+      "parallel"
+    ],
+    "orderIndex": 53
+  },
+  {
+    "id": "closed_ohm",
+    "title": "闭合电路欧姆定律",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "I = \\frac{E}{R + r}",
+    "conditions": "闭合电路，E 为电源电动势，r 为电源内阻，R 为外电路总电阻。路端电压 U = E − Ir。",
+    "variables": [
+      {
+        "symbol": "I",
+        "name": "电路电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "E",
+        "name": "电源电动势",
+        "unit": "V"
+      },
+      {
+        "symbol": "R",
+        "name": "外电路总电阻",
+        "unit": "Ω"
+      },
+      {
+        "symbol": "r",
+        "name": "电源内阻",
+        "unit": "Ω"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "I = \\frac{E}{R}",
+        "why": "闭合电路中必须计入电源内阻 r，否则电流会偏大。"
+      },
+      {
+        "wrong": "I = \\frac{E}{R - r}",
+        "why": "内阻与外电阻串联，总电阻是 R + r。"
+      }
+    ],
+    "relatedIds": [
+      "ohm",
+      "electric_power",
+      "joule"
+    ],
+    "orderIndex": 54
+  },
+  {
+    "id": "electric_power",
+    "title": "电功率",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "P = UI",
+    "conditions": "任意用电器或电路的电功率。U 为用电器两端电压，I 为通过它的电流；纯电阻还可用 P = I²R = U²/R。",
+    "variables": [
+      {
+        "symbol": "P",
+        "name": "电功率",
+        "unit": "W"
+      },
+      {
+        "symbol": "U",
+        "name": "电压",
+        "unit": "V"
+      },
+      {
+        "symbol": "I",
+        "name": "电流",
+        "unit": "A"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "P = \\frac{U}{I}",
+        "why": "电功率等于电压乘电流，不是电压除以电流。"
+      },
+      {
+        "wrong": "P = I^2R",
+        "why": "P = I²R 只对纯电阻成立；对电动机等非纯电阻，电功率仍用 P = UI，发热功率才用 I²R。"
+      }
+    ],
+    "relatedIds": [
+      "joule",
+      "closed_ohm",
+      "ohm"
+    ],
+    "orderIndex": 55
+  },
+  {
+    "id": "joule",
+    "title": "焦耳定律",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "Q = I^2Rt",
+    "conditions": "电流通过电阻产生焦耳热的计算。I 为通过导体的电流，R 为电阻，t 为通电时间；对纯电阻，Q = UIt = U²t/R。",
+    "variables": [
+      {
+        "symbol": "Q",
+        "name": "焦耳热",
+        "unit": "J"
+      },
+      {
+        "symbol": "I",
+        "name": "电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "R",
+        "name": "电阻",
+        "unit": "Ω"
+      },
+      {
+        "symbol": "t",
+        "name": "通电时间",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "Q = I^2R",
+        "why": "焦耳热还要乘通电时间 t，量纲才是能量。"
+      },
+      {
+        "wrong": "Q = \\frac{I^2}{R}t",
+        "why": "焦耳热与电阻成正比，R 应在分子。"
+      }
+    ],
+    "relatedIds": [
+      "electric_power",
+      "ohm",
+      "closed_ohm"
+    ],
+    "orderIndex": 56
+  },
+  {
+    "id": "series",
+    "title": "串联电路的总电阻",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "R = R_1 + R_2",
+    "conditions": "两个电阻串联。串联电路中电流处处相等，总电压等于各分电压之和；总电阻大于任一分电阻。",
+    "variables": [
+      {
+        "symbol": "R",
+        "name": "总电阻",
+        "unit": "Ω"
+      },
+      {
+        "symbol": "R_1",
+        "name": "电阻 1",
+        "unit": "Ω"
+      },
+      {
+        "symbol": "R_2",
+        "name": "电阻 2",
+        "unit": "Ω"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\frac{1}{R} = \\frac{1}{R_1} + \\frac{1}{R_2}",
+        "why": "这是并联电路的电阻关系；串联总电阻应直接相加。"
+      },
+      {
+        "wrong": "R = \\frac{R_1R_2}{R_1 + R_2}",
+        "why": "这是两个电阻并联时的总电阻，不是串联。"
+      }
+    ],
+    "relatedIds": [
+      "parallel",
+      "resistance",
+      "ohm"
+    ],
+    "orderIndex": 57
+  },
+  {
+    "id": "parallel",
+    "title": "并联电路的总电阻",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\frac{1}{R} = \\frac{1}{R_1} + \\frac{1}{R_2}",
+    "conditions": "两个电阻并联。并联电路中各支路电压相等，总电流等于各支路电流之和；总电阻小于任一分电阻。",
+    "variables": [
+      {
+        "symbol": "R",
+        "name": "总电阻",
+        "unit": "Ω"
+      },
+      {
+        "symbol": "R_1",
+        "name": "支路电阻 1",
+        "unit": "Ω"
+      },
+      {
+        "symbol": "R_2",
+        "name": "支路电阻 2",
+        "unit": "Ω"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "R = R_1 + R_2",
+        "why": "这是串联电路的电阻关系；并联总电阻应满足倒数相加。"
+      },
+      {
+        "wrong": "R = \\frac{R_1 + R_2}{R_1R_2}",
+        "why": "两个电阻并联的总电阻是 R₁R₂/(R₁+R₂)，不是它的倒数。"
+      }
+    ],
+    "relatedIds": [
+      "series",
+      "resistance",
+      "ohm"
+    ],
+    "orderIndex": 58
+  },
+  {
+    "id": "ampere_force",
+    "title": "安培力",
+    "module": "electromagnetism",
+    "chapter": "磁场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F = BIL\\sin\\theta",
+    "conditions": "一段通电直导线放在匀强磁场中。θ 为电流方向与磁场方向的夹角，L 为导线在磁场中的有效长度；B 与 I 平行时安培力为零。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "安培力",
+        "unit": "N"
+      },
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      },
+      {
+        "symbol": "I",
+        "name": "电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "L",
+        "name": "有效长度",
+        "unit": "m"
+      },
+      {
+        "symbol": "\\theta",
+        "name": "电流与磁场夹角",
+        "unit": "rad 或 °"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = BIL\\cos\\theta",
+        "why": "安培力公式中是 sinθ，θ 为电流与磁场的夹角。"
+      },
+      {
+        "wrong": "F = BIL",
+        "why": "只有电流与磁场垂直时才能省略 sinθ。"
+      }
+    ],
+    "relatedIds": [
+      "lorentz",
+      "magnetic_flux",
+      "motional_emf"
+    ],
+    "orderIndex": 59
+  },
+  {
+    "id": "lorentz",
+    "title": "洛伦兹力",
+    "module": "electromagnetism",
+    "chapter": "磁场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "F = qvB\\sin\\theta",
+    "conditions": "运动电荷在匀强磁场中。θ 为速度方向与磁场方向的夹角，q 带符号；v 与 B 平行时洛伦兹力为零。",
+    "variables": [
+      {
+        "symbol": "F",
+        "name": "洛伦兹力",
+        "unit": "N"
+      },
+      {
+        "symbol": "q",
+        "name": "电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "v",
+        "name": "速度大小",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      },
+      {
+        "symbol": "\\theta",
+        "name": "速度与磁场夹角",
+        "unit": "rad 或 °"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "F = qvB\\cos\\theta",
+        "why": "洛伦兹力公式中取 sinθ，θ 是速度与磁场的夹角。"
+      },
+      {
+        "wrong": "F = qvB",
+        "why": "只有速度与磁场垂直时才能省略 sinθ。"
+      }
+    ],
+    "relatedIds": [
+      "ampere_force",
+      "charge_radius",
+      "cyclotron_period"
+    ],
+    "orderIndex": 60
+  },
+  {
+    "id": "charge_radius",
+    "title": "带电粒子在匀强磁场中的轨道半径",
+    "module": "electromagnetism",
+    "chapter": "磁场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "r = \\frac{mv}{qB}",
+    "conditions": "带电粒子速度方向垂直于匀强磁场，只受洛伦兹力，做匀速圆周运动。q 取电荷量绝对值。",
+    "variables": [
+      {
+        "symbol": "r",
+        "name": "轨道半径",
+        "unit": "m"
+      },
+      {
+        "symbol": "m",
+        "name": "粒子质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "v",
+        "name": "速度大小",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "q",
+        "name": "电荷量绝对值",
+        "unit": "C"
+      },
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "r = \\frac{qB}{mv}",
+        "why": "半径与速度成正比、与 qB 成反比，应写成 mv/(qB)。"
+      },
+      {
+        "wrong": "r = \\frac{mvB}{q}",
+        "why": "磁感应强度 B 应在分母：由 qvB = mv²/r 可得 r = mv/(qB)。"
+      }
+    ],
+    "relatedIds": [
+      "cyclotron_period",
+      "lorentz",
+      "ampere_force"
+    ],
+    "orderIndex": 61
+  },
+  {
+    "id": "cyclotron_period",
+    "title": "带电粒子在磁场中的圆周运动周期",
+    "module": "electromagnetism",
+    "chapter": "磁场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "T = \\frac{2\\pi m}{qB}",
+    "conditions": "带电粒子速度垂直于匀强磁场，只受洛伦兹力。周期与速度大小、轨道半径无关，这一特点是回旋加速器的工作原理。",
+    "variables": [
+      {
+        "symbol": "T",
+        "name": "圆周运动周期",
+        "unit": "s"
+      },
+      {
+        "symbol": "m",
+        "name": "粒子质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "q",
+        "name": "电荷量绝对值",
+        "unit": "C"
+      },
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "T = \\frac{2\\pi qB}{m}",
+        "why": "周期与 m 成正比、与 qB 成反比，分子应为 2πm。"
+      },
+      {
+        "wrong": "T = \\frac{2\\pi r}{v}",
+        "why": "该式是一般圆周运动的周期；在匀强磁场中代入 r = mv/(qB) 后得到 T = 2πm/(qB)。"
+      }
+    ],
+    "relatedIds": [
+      "charge_radius",
+      "lorentz",
+      "ampere_force"
+    ],
+    "orderIndex": 62
+  },
+  {
+    "id": "magnetic_flux",
+    "title": "磁通量",
+    "module": "electromagnetism",
+    "chapter": "电磁感应",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\Phi = BS\\cos\\theta",
+    "conditions": "匀强磁场穿过平面。θ 是磁感应强度 B 与平面法线的夹角；当 B 垂直于平面时 Φ = BS。",
+    "variables": [
+      {
+        "symbol": "\\Phi",
+        "name": "磁通量",
+        "unit": "Wb"
+      },
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      },
+      {
+        "symbol": "S",
+        "name": "平面面积",
+        "unit": "m²"
+      },
+      {
+        "symbol": "\\theta",
+        "name": "B 与平面法线夹角",
+        "unit": "rad 或 °"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\Phi = BS\\sin\\theta",
+        "why": "Φ = BScosθ 中的 θ 是 B 与法线的夹角；若 θ 取 B 与平面的夹角，才改用 sinθ，必须明确角的定义。"
+      },
+      {
+        "wrong": "\\Phi = BS",
+        "why": "只有 B 垂直于平面时才有 Φ = BS；一般情形需乘 cosθ。"
+      }
+    ],
+    "relatedIds": [
+      "faraday",
+      "motional_emf",
+      "ampere_force"
+    ],
+    "orderIndex": 63
+  },
+  {
+    "id": "faraday",
+    "title": "法拉第电磁感应定律",
+    "module": "electromagnetism",
+    "chapter": "电磁感应",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E = n\\frac{\\Delta\\Phi}{\\Delta t}",
+    "conditions": "闭合或断开回路中磁通量发生变化。E 为 Δt 内的平均感应电动势，n 为线圈匝数；ΔΦ 是磁通量的变化量。",
+    "variables": [
+      {
+        "symbol": "E",
+        "name": "感应电动势",
+        "unit": "V"
+      },
+      {
+        "symbol": "n",
+        "name": "线圈匝数",
+        "unit": "匝"
+      },
+      {
+        "symbol": "\\Delta\\Phi",
+        "name": "磁通量变化量",
+        "unit": "Wb"
+      },
+      {
+        "symbol": "\\Delta t",
+        "name": "时间间隔",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E = \\frac{\\Delta\\Phi}{n\\Delta t}",
+        "why": "匝数 n 越多，感应电动势越大，n 应在分子。"
+      },
+      {
+        "wrong": "E = n\\frac{\\Phi}{\\Delta t}",
+        "why": "公式中是磁通量的变化量 ΔΦ，不是某时刻的磁通量 Φ。"
+      }
+    ],
+    "relatedIds": [
+      "motional_emf",
+      "magnetic_flux",
+      "transformer"
+    ],
+    "orderIndex": 64
+  },
+  {
+    "id": "motional_emf",
+    "title": "导体棒切割磁感线产生的感应电动势",
+    "module": "electromagnetism",
+    "chapter": "电磁感应",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E = BLv",
+    "conditions": "导体棒在匀强磁场中做切割磁感线运动，B、L、v 三者两两垂直。L 为导体棒在磁场中的有效长度，v 为垂直于 B 的速度分量。",
+    "variables": [
+      {
+        "symbol": "E",
+        "name": "感应电动势",
+        "unit": "V"
+      },
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      },
+      {
+        "symbol": "L",
+        "name": "有效长度",
+        "unit": "m"
+      },
+      {
+        "symbol": "v",
+        "name": "速度大小",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E = BLv\\sin\\theta",
+        "why": "该式已默认三者垂直；若速度与 B 不垂直，应取垂直分量 v⊥，而不是随意乘 sinθ。"
+      },
+      {
+        "wrong": "E = \\frac{BL}{v}",
+        "why": "感应电动势与速度成正比，应乘以 v。"
+      }
+    ],
+    "relatedIds": [
+      "faraday",
+      "magnetic_flux",
+      "ampere_force"
+    ],
+    "orderIndex": 65
+  },
+  {
+    "id": "transformer",
+    "title": "理想变压器的电压比",
+    "module": "electromagnetism",
+    "chapter": "交变电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\frac{U_1}{U_2} = \\frac{n_1}{n_2}",
+    "conditions": "理想变压器，原、副线圈磁通量变化率相同，忽略能量损失。只能改变交流电压，不能改变直流电压。",
+    "variables": [
+      {
+        "symbol": "U_1",
+        "name": "原线圈电压",
+        "unit": "V"
+      },
+      {
+        "symbol": "U_2",
+        "name": "副线圈电压",
+        "unit": "V"
+      },
+      {
+        "symbol": "n_1",
+        "name": "原线圈匝数",
+        "unit": "匝"
+      },
+      {
+        "symbol": "n_2",
+        "name": "副线圈匝数",
+        "unit": "匝"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\frac{U_1}{U_2} = \\frac{n_2}{n_1}",
+        "why": "电压比等于匝数比，原线圈对应原线圈，顺序不能颠倒。"
+      },
+      {
+        "wrong": "\\frac{I_1}{I_2} = \\frac{n_1}{n_2}",
+        "why": "理想变压器电流与匝数成反比，应为 I₁/I₂ = n₂/n₁；电压才与匝数成正比。"
+      }
+    ],
+    "relatedIds": [
+      "faraday",
+      "peak_emf",
+      "rms"
+    ],
+    "orderIndex": 66
+  },
+  {
+    "id": "transmission",
+    "title": "远距离输电的功率损耗",
+    "module": "electromagnetism",
+    "chapter": "交变电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "P_{\\text{损}} = I^2R",
+    "conditions": "输电线路上因电阻产生的功率损耗。I 为输电线中的电流，R 为输电线路的总电阻；输电电压越高，在输送功率一定时电流越小，损耗越少。",
+    "variables": [
+      {
+        "symbol": "P_{\text{损}}",
+        "name": "线路损耗功率",
+        "unit": "W"
+      },
+      {
+        "symbol": "I",
+        "name": "输电线路电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "R",
+        "name": "输电线路总电阻",
+        "unit": "Ω"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "P_{\\text{损}} = \\frac{U^2}{R}",
+        "why": "U 若取输电电压，不能直接用 U²/R 算线路损耗；应使用线路上的电压降 ΔU = IR。"
+      },
+      {
+        "wrong": "P_{\\text{损}} = IR^2",
+        "why": "损耗功率等于电流的平方乘电阻，即 I²R，不是 I·R²。"
+      }
+    ],
+    "relatedIds": [
+      "transformer",
+      "electric_power",
+      "joule"
+    ],
+    "orderIndex": 67
+  },
+  {
+    "id": "peak_emf",
+    "title": "正弦交流电的峰值电动势",
+    "module": "electromagnetism",
+    "chapter": "交变电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_m = NBS\\omega",
+    "conditions": "矩形线圈在匀强磁场中绕垂直于磁场方向的轴匀速转动。N 为匝数，B 为磁感应强度，S 为线圈面积，ω 为角速度。",
+    "variables": [
+      {
+        "symbol": "E_m",
+        "name": "峰值电动势",
+        "unit": "V"
+      },
+      {
+        "symbol": "N",
+        "name": "线圈匝数",
+        "unit": "匝"
+      },
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      },
+      {
+        "symbol": "S",
+        "name": "线圈面积",
+        "unit": "m²"
+      },
+      {
+        "symbol": "\\omega",
+        "name": "角速度",
+        "unit": "rad/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_m = \\frac{NBS}{\\omega}",
+        "why": "峰值电动势与角速度成正比，应乘以 ω。"
+      },
+      {
+        "wrong": "E_m = BS\\omega",
+        "why": "当线圈有多匝时还要乘匝数 N，不能把单匝结果当作 N 匝结果。"
+      }
+    ],
+    "relatedIds": [
+      "rms",
+      "transformer",
+      "angular_speed"
+    ],
+    "orderIndex": 68
+  },
+  {
+    "id": "rms",
+    "title": "正弦交流电的有效值",
+    "module": "electromagnetism",
+    "chapter": "交变电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "U = \\frac{U_m}{\\sqrt{2}}",
+    "conditions": "正弦式交变电流。有效值根据相同电阻、相同时间内产生相同热效应来定义；非正弦交流电不能直接套用此关系。",
+    "variables": [
+      {
+        "symbol": "U",
+        "name": "电压有效值",
+        "unit": "V"
+      },
+      {
+        "symbol": "U_m",
+        "name": "电压峰值",
+        "unit": "V"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "U = U_m\\sqrt{2}",
+        "why": "有效值等于峰值除以 √2，不是乘以 √2。"
+      },
+      {
+        "wrong": "U = \\frac{U_m}{2}",
+        "why": "正弦交流电的有效值是峰值的 1/√2，不是 1/2。"
+      }
+    ],
+    "relatedIds": [
+      "peak_emf",
+      "transformer",
+      "transmission"
+    ],
+    "orderIndex": 69
+  },
+  {
+    "id": "current_definition",
+    "title": "电流的定义式",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "I = \\frac{q}{t}",
+    "conditions": "恒定电流。q 为时间 t 内通过导体横截面的电荷量；I 的方向规定为正电荷定向移动的方向。",
+    "variables": [
+      {
+        "symbol": "I",
+        "name": "电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "q",
+        "name": "通过横截面的电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "t",
+        "name": "时间",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "I = qt",
+        "why": "电流是电荷量与时间的比值，不是乘积。"
+      },
+      {
+        "wrong": "I = \\frac{t}{q}",
+        "why": "电流与电荷量成正比、与时间成反比，应写成 q/t。"
+      }
+    ],
+    "relatedIds": [
+      "ohm",
+      "electric_power",
+      "joule"
+    ],
+    "orderIndex": 70
+  },
+  {
+    "id": "emf_definition",
+    "title": "电动势的定义式",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E = \\frac{W}{q}",
+    "conditions": "W 为非静电力把电荷 q 从电源负极移到正极所做的功。电动势 E 由电源本身决定，与外电路无关。",
+    "variables": [
+      {
+        "symbol": "E",
+        "name": "电动势",
+        "unit": "V"
+      },
+      {
+        "symbol": "W",
+        "name": "非静电力做的功",
+        "unit": "J"
+      },
+      {
+        "symbol": "q",
+        "name": "电荷量",
+        "unit": "C"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E = Wq",
+        "why": "电动势是功与电荷量的比值，不是乘积。"
+      },
+      {
+        "wrong": "E = \\frac{q}{W}",
+        "why": "电动势与 W 成正比、与 q 成反比，应写成 W/q。"
+      }
+    ],
+    "relatedIds": [
+      "closed_ohm",
+      "electric_work",
+      "electric_power"
+    ],
+    "orderIndex": 71
+  },
+  {
+    "id": "magnetic_field_def",
+    "title": "磁感应强度的定义式",
+    "module": "electromagnetism",
+    "chapter": "磁场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "B = \\frac{F}{IL}",
+    "conditions": "一段通电直导线与匀强磁场垂直。L 为导线在磁场中的有效长度，B 由磁场本身决定，与 F、I、L 无关。",
+    "variables": [
+      {
+        "symbol": "B",
+        "name": "磁感应强度",
+        "unit": "T"
+      },
+      {
+        "symbol": "F",
+        "name": "安培力",
+        "unit": "N"
+      },
+      {
+        "symbol": "I",
+        "name": "电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "L",
+        "name": "有效长度",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "B = FIL",
+        "why": "磁感应强度是力与电流、长度乘积的比值，不是乘积。"
+      },
+      {
+        "wrong": "B = \\frac{IL}{F}",
+        "why": "B 与 F 成正比、与 IL 成反比，应写成 F/(IL)。"
+      }
+    ],
+    "relatedIds": [
+      "ampere_force",
+      "lorentz",
+      "magnetic_flux"
+    ],
+    "orderIndex": 72
+  },
+  {
+    "id": "electric_work",
+    "title": "电功",
+    "module": "electromagnetism",
+    "chapter": "恒定电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "W = UIt",
+    "conditions": "任意用电器。U、I 为同一段电路的电压和电流，t 为通电时间；纯电阻还可用 W = I²Rt = U²t/R。",
+    "variables": [
+      {
+        "symbol": "W",
+        "name": "电功",
+        "unit": "J"
+      },
+      {
+        "symbol": "U",
+        "name": "电压",
+        "unit": "V"
+      },
+      {
+        "symbol": "I",
+        "name": "电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "t",
+        "name": "通电时间",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "W = \\frac{UI}{t}",
+        "why": "电功是功率乘时间，应写成 UIt。"
+      },
+      {
+        "wrong": "W = UIt^2",
+        "why": "时间只取一次方，量纲才是焦耳。"
+      }
+    ],
+    "relatedIds": [
+      "electric_power",
+      "joule",
+      "closed_ohm"
+    ],
+    "orderIndex": 73
+  },
+  {
+    "id": "transformer_current",
+    "title": "理想变压器的电流比",
+    "module": "electromagnetism",
+    "chapter": "交变电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\frac{I_1}{I_2} = \\frac{n_2}{n_1}",
+    "conditions": "理想变压器且只有一个副线圈，输入功率等于输出功率，忽略能量损失。电流与匝数成反比。",
+    "variables": [
+      {
+        "symbol": "I_1",
+        "name": "原线圈电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "I_2",
+        "name": "副线圈电流",
+        "unit": "A"
+      },
+      {
+        "symbol": "n_1",
+        "name": "原线圈匝数",
+        "unit": "匝"
+      },
+      {
+        "symbol": "n_2",
+        "name": "副线圈匝数",
+        "unit": "匝"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\frac{I_1}{I_2} = \\frac{n_1}{n_2}",
+        "why": "理想变压器电流与匝数成反比，电压才与匝数成正比。"
+      },
+      {
+        "wrong": "I_1I_2 = n_1n_2",
+        "why": "电流比与匝数比是比例关系，不是乘积相等。"
+      }
+    ],
+    "relatedIds": [
+      "transformer",
+      "electric_power",
+      "transmission"
+    ],
+    "orderIndex": 74
+  },
+  {
+    "id": "electric_potential_energy",
+    "title": "电荷的电势能",
+    "module": "electromagnetism",
+    "chapter": "静电场",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_p = q\\varphi",
+    "conditions": "φ 为该点电势，q 必须带符号代入。电势能的值与零势能点的选择有关；电势能是标量。",
+    "variables": [
+      {
+        "symbol": "E_p",
+        "name": "电势能",
+        "unit": "J"
+      },
+      {
+        "symbol": "q",
+        "name": "电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "\\varphi",
+        "name": "电势",
+        "unit": "V"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_p = \\frac{q}{\\varphi}",
+        "why": "电势能等于电荷量乘电势，不是相除。"
+      },
+      {
+        "wrong": "E_p = \\frac{\\varphi}{q}",
+        "why": "电势能与 q 成正比，应写成 qφ。"
+      }
+    ],
+    "relatedIds": [
+      "potential_diff",
+      "field_def",
+      "uniform_field"
+    ],
+    "orderIndex": 75
+  },
+  {
+    "id": "ac_instant",
+    "title": "正弦交流电的瞬时值",
+    "module": "electromagnetism",
+    "chapter": "交变电流",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "i = I_m\\sin(\\omega t + \\varphi)",
+    "conditions": "正弦式交变电流。i 为瞬时值，I_m 为峰值，ω 为角频率，φ 为初相位；t 从所选计时起点算起。",
+    "variables": [
+      {
+        "symbol": "i",
+        "name": "电流瞬时值",
+        "unit": "A"
+      },
+      {
+        "symbol": "I_m",
+        "name": "电流峰值",
+        "unit": "A"
+      },
+      {
+        "symbol": "\\omega",
+        "name": "角频率",
+        "unit": "rad/s"
+      },
+      {
+        "symbol": "t",
+        "name": "时间",
+        "unit": "s"
+      },
+      {
+        "symbol": "\\varphi",
+        "name": "初相位",
+        "unit": "rad"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "i = I_m\\sin(\\omega t)\\cos\\varphi",
+        "why": "sin(ωt+φ) 不能只保留第一项，还缺少 cos(ωt)sinφ 项。"
+      },
+      {
+        "wrong": "i = \\frac{I_m}{\\sin(\\omega t + \\varphi)}",
+        "why": "瞬时值与峰值是相乘关系，不是相除。"
+      }
+    ],
+    "relatedIds": [
+      "rms",
+      "peak_emf",
+      "transformer"
+    ],
+    "orderIndex": 76
+  },
+  {
+    "id": "refraction",
+    "title": "光的折射定律",
+    "module": "optics",
+    "chapter": "光",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "n = \\frac{\\sin i}{\\sin r}",
+    "conditions": "光从真空（或空气，近似）斜射入某种介质，i 为入射角，r 为折射角，n 为该介质相对真空的折射率。光垂直入射时 i = r = 0。",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "相对折射率",
+        "unit": "无单位"
+      },
+      {
+        "symbol": "i",
+        "name": "入射角",
+        "unit": "rad 或 °"
+      },
+      {
+        "symbol": "r",
+        "name": "折射角",
+        "unit": "rad 或 °"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "n = \\frac{\\sin r}{\\sin i}",
+        "why": "折射率是真空中的入射角正弦与介质中的折射角正弦之比，顺序不能颠倒。"
+      },
+      {
+        "wrong": "n = \\frac{i}{r}",
+        "why": "折射定律使用的是正弦值之比，不是角度本身之比。"
+      }
+    ],
+    "relatedIds": [
+      "n_c_v",
+      "critical_angle",
+      "double_slit"
+    ],
+    "orderIndex": 77
+  },
+  {
+    "id": "n_c_v",
+    "title": "折射率与光速的关系",
+    "module": "optics",
+    "chapter": "光",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "n = \\frac{c}{v}",
+    "conditions": "光在某种介质中传播，c 为真空中的光速，v 为光在该介质中的传播速度，n 为该介质相对真空的折射率（n ≥ 1）。",
+    "variables": [
+      {
+        "symbol": "n",
+        "name": "相对折射率",
+        "unit": "无单位"
+      },
+      {
+        "symbol": "c",
+        "name": "真空中的光速",
+        "unit": "m/s"
+      },
+      {
+        "symbol": "v",
+        "name": "介质中的光速",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "n = \\frac{v}{c}",
+        "why": "介质中光速小于真空光速，n 应大于 1，所以是 c/v。"
+      },
+      {
+        "wrong": "v = nc",
+        "why": "由 n = c/v 得 v = c/n；n > 1 时 v < c。"
+      }
+    ],
+    "relatedIds": [
+      "refraction",
+      "critical_angle",
+      "photon_energy"
+    ],
+    "orderIndex": 78
+  },
+  {
+    "id": "critical_angle",
+    "title": "全反射临界角",
+    "module": "optics",
+    "chapter": "光",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\sin C = \\frac{1}{n}",
+    "conditions": "光从光密介质射向光疏介质，且入射角增大到临界角 C 时，折射角等于 90°，折射光恰好消失。n 为光密介质相对光疏介质的折射率（n > 1）。",
+    "variables": [
+      {
+        "symbol": "C",
+        "name": "临界角",
+        "unit": "rad 或 °"
+      },
+      {
+        "symbol": "n",
+        "name": "相对折射率",
+        "unit": "无单位"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\sin C = n",
+        "why": "临界角满足 sinC = 1/n；因为 n > 1，sinC 必须小于 1。"
+      },
+      {
+        "wrong": "C = \\frac{1}{n}",
+        "why": "临界角本身不是 1/n，而是其正弦值等于 1/n。"
+      }
+    ],
+    "relatedIds": [
+      "refraction",
+      "n_c_v",
+      "double_slit"
+    ],
+    "orderIndex": 79
+  },
+  {
+    "id": "double_slit",
+    "title": "双缝干涉条纹间距",
+    "module": "optics",
+    "chapter": "光",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\Delta x = \\frac{L}{d}\\lambda",
+    "conditions": "双缝干涉实验，两缝相干且间距 d 远小于缝到屏的距离 L。Δx 为相邻两条亮条纹（或暗条纹）中心的间距，λ 为光在真空中的波长。",
+    "variables": [
+      {
+        "symbol": "\\Delta x",
+        "name": "相邻条纹间距",
+        "unit": "m"
+      },
+      {
+        "symbol": "L",
+        "name": "缝到屏的距离",
+        "unit": "m"
+      },
+      {
+        "symbol": "d",
+        "name": "双缝间距",
+        "unit": "m"
+      },
+      {
+        "symbol": "\\lambda",
+        "name": "光的波长",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\Delta x = \\frac{d}{L}\\lambda",
+        "why": "条纹间距与 L 成正比、与 d 成反比，L 应在分子。"
+      },
+      {
+        "wrong": "\\Delta x = \\frac{L\\lambda}{d^2}",
+        "why": "分母是双缝间距 d 的一次方，不是 d²。"
+      }
+    ],
+    "relatedIds": [
+      "refraction",
+      "critical_angle",
+      "photon_energy"
+    ],
+    "orderIndex": 80
+  },
+  {
+    "id": "photon_energy",
+    "title": "光子的能量",
+    "module": "optics",
+    "chapter": "光",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E = h\\nu",
+    "conditions": "光子能量由光的频率决定，h 为普朗克常量（约 6.63×10⁻³⁴ J·s），ν 为光的频率。光的强度不影响单个光子的能量。",
+    "variables": [
+      {
+        "symbol": "E",
+        "name": "光子能量",
+        "unit": "J"
+      },
+      {
+        "symbol": "h",
+        "name": "普朗克常量",
+        "unit": "J·s"
+      },
+      {
+        "symbol": "\\nu",
+        "name": "光的频率",
+        "unit": "Hz"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E = \\frac{h}{\\nu}",
+        "why": "光子能量与频率成正比，应相乘；h/ν 的量纲不是能量。"
+      },
+      {
+        "wrong": "E = h\\lambda",
+        "why": "hν 中的 ν 是频率，不是波长；用波长表示时应写成 E = hc/λ。"
+      }
+    ],
+    "relatedIds": [
+      "photoelectric",
+      "de_broglie",
+      "photon_momentum"
+    ],
+    "orderIndex": 81
+  },
+  {
+    "id": "photoelectric",
+    "title": "爱因斯坦光电效应方程",
+    "module": "optics",
+    "chapter": "光",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_k = h\\nu - W_0",
+    "conditions": "光电效应中，Ek 为光电子的最大初动能，W₀ 为金属的逸出功。只有 hν ≥ W₀ 时才有光电子逸出；光强影响光电子数目，不改变最大初动能。",
+    "variables": [
+      {
+        "symbol": "E_k",
+        "name": "光电子最大初动能",
+        "unit": "J"
+      },
+      {
+        "symbol": "h",
+        "name": "普朗克常量",
+        "unit": "J·s"
+      },
+      {
+        "symbol": "\\nu",
+        "name": "入射光频率",
+        "unit": "Hz"
+      },
+      {
+        "symbol": "W_0",
+        "name": "金属逸出功",
+        "unit": "J"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_k = h\\nu + W_0",
+        "why": "电子要克服逸出功，最大初动能应等于光子能量减去逸出功。"
+      },
+      {
+        "wrong": "E_k = h\\nu",
+        "why": "遗漏了逸出功；只有 W₀ = 0 时最大初动能才等于光子能量。"
+      }
+    ],
+    "relatedIds": [
+      "photon_energy",
+      "stopping_voltage",
+      "de_broglie"
+    ],
+    "orderIndex": 82
+  },
+  {
+    "id": "stopping_voltage",
+    "title": "遏止电压与最大初动能",
+    "module": "optics",
+    "chapter": "光",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "eU_c = E_k",
+    "conditions": "光电效应的遏止电压实验。U_c 为遏止电压，e 为电子电荷量，Ek 为光电子最大初动能；电子克服电场力做功，动能恰好减为零。",
+    "variables": [
+      {
+        "symbol": "e",
+        "name": "电子电荷量",
+        "unit": "C"
+      },
+      {
+        "symbol": "U_c",
+        "name": "遏止电压",
+        "unit": "V"
+      },
+      {
+        "symbol": "E_k",
+        "name": "最大初动能",
+        "unit": "J"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "eU_c = \\frac{1}{2}E_k",
+        "why": "遏止电压做的功恰好等于最大初动能，不含 1/2。"
+      },
+      {
+        "wrong": "U_c = E_k",
+        "why": "电压与能量单位不同，必须乘电子电荷量 e。"
+      }
+    ],
+    "relatedIds": [
+      "photoelectric",
+      "photon_energy",
+      "mass_energy"
+    ],
+    "orderIndex": 83
+  },
+  {
+    "id": "de_broglie",
+    "title": "德布罗意波长",
+    "module": "optics",
+    "chapter": "波粒二象性",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\lambda = \\frac{h}{p}",
+    "conditions": "实物粒子或光子的物质波。λ 为德布罗意波长，p 为粒子的动量，h 为普朗克常量。宏观物体波长极短，波动性不明显。",
+    "variables": [
+      {
+        "symbol": "\\lambda",
+        "name": "德布罗意波长",
+        "unit": "m"
+      },
+      {
+        "symbol": "h",
+        "name": "普朗克常量",
+        "unit": "J·s"
+      },
+      {
+        "symbol": "p",
+        "name": "动量",
+        "unit": "kg·m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\lambda = hp",
+        "why": "波长与动量成反比，应写成 h/p。"
+      },
+      {
+        "wrong": "\\lambda = \\frac{p}{h}",
+        "why": "普朗克常量应在分子，动量在分母。"
+      }
+    ],
+    "relatedIds": [
+      "photon_energy",
+      "photon_momentum",
+      "photoelectric"
+    ],
+    "orderIndex": 84
+  },
+  {
+    "id": "mass_energy",
+    "title": "质能方程",
+    "module": "modern",
+    "chapter": "原子核与相对论",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E = mc^2",
+    "conditions": "质量和能量具有对应关系，E 为物体的总能量（包括静止能量），m 为质量，c 为真空中的光速。质量亏损对应释放的核能。",
+    "variables": [
+      {
+        "symbol": "E",
+        "name": "总能量",
+        "unit": "J"
+      },
+      {
+        "symbol": "m",
+        "name": "质量",
+        "unit": "kg"
+      },
+      {
+        "symbol": "c",
+        "name": "真空中的光速",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E = \\frac{1}{2}mc^2",
+        "why": "质能方程不含 1/2，静止能量为 mc²。"
+      },
+      {
+        "wrong": "E = mc",
+        "why": "光速需要平方，量纲才是能量。"
+      }
+    ],
+    "relatedIds": [
+      "mass_defect_energy",
+      "energy_level",
+      "photon_energy"
+    ],
+    "orderIndex": 85
+  },
+  {
+    "id": "half_life",
+    "title": "放射性元素的半衰期",
+    "module": "modern",
+    "chapter": "原子核",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "N = N_0\\left(\\frac{1}{2}\\right)^{t/T}",
+    "conditions": "大量放射性原子核的衰变遵循统计规律。N₀ 为初始核数，N 为经过时间 t 后未衰变的核数，T 为半衰期；单个核何时衰变无法预测。",
+    "variables": [
+      {
+        "symbol": "N",
+        "name": "剩余未衰变核数",
+        "unit": "个"
+      },
+      {
+        "symbol": "N_0",
+        "name": "初始核数",
+        "unit": "个"
+      },
+      {
+        "symbol": "t",
+        "name": "经过的时间",
+        "unit": "s"
+      },
+      {
+        "symbol": "T",
+        "name": "半衰期",
+        "unit": "s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "N = N_0\\left(\\frac{1}{2}\\right)^{T/t}",
+        "why": "指数应为经过时间与半衰期之比 t/T，不能写反。"
+      },
+      {
+        "wrong": "N = N_0 \\cdot \\frac{t}{T}",
+        "why": "剩余核数按指数规律减少，不是线性减少。"
+      }
+    ],
+    "relatedIds": [
+      "mass_defect_energy",
+      "energy_level",
+      "mass_energy"
+    ],
+    "orderIndex": 86
+  },
+  {
+    "id": "mass_defect_energy",
+    "title": "质量亏损与核能",
+    "module": "modern",
+    "chapter": "原子核",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "\\Delta E = \\Delta m c^2",
+    "conditions": "核反应前后质量亏损 Δm 对应释放的核能 ΔE。Δm 为反应前总质量与反应后总质量之差，c 为真空中光速。",
+    "variables": [
+      {
+        "symbol": "\\Delta E",
+        "name": "释放的核能",
+        "unit": "J"
+      },
+      {
+        "symbol": "\\Delta m",
+        "name": "质量亏损",
+        "unit": "kg"
+      },
+      {
+        "symbol": "c",
+        "name": "真空中的光速",
+        "unit": "m/s"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "\\Delta E = \\Delta m c",
+        "why": "光速需要平方，否则量纲不是能量。"
+      },
+      {
+        "wrong": "\\Delta E = \\frac{1}{2}\\Delta m c^2",
+        "why": "核能计算不含 1/2。"
+      }
+    ],
+    "relatedIds": [
+      "mass_energy",
+      "half_life",
+      "energy_level"
+    ],
+    "orderIndex": 87
+  },
+  {
+    "id": "energy_level",
+    "title": "原子能级跃迁",
+    "module": "modern",
+    "chapter": "原子结构",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "h\\nu = E_m - E_n",
+    "conditions": "原子在两个定态能级之间跃迁，吸收或辐射光子的能量等于两能级能量差的绝对值。m、n 为能级量子数，通常取 m > n 表示辐射光子。",
+    "variables": [
+      {
+        "symbol": "h",
+        "name": "普朗克常量",
+        "unit": "J·s"
+      },
+      {
+        "symbol": "\\nu",
+        "name": "光子频率",
+        "unit": "Hz"
+      },
+      {
+        "symbol": "E_m",
+        "name": "较高能级能量",
+        "unit": "J 或 eV"
+      },
+      {
+        "symbol": "E_n",
+        "name": "较低能级能量",
+        "unit": "J 或 eV"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "h\\nu = E_n - E_m",
+        "why": "光子能量应等于两能级能量差的绝对值；若 m 为高能级，应写成 E_m − E_n。"
+      },
+      {
+        "wrong": "h\\nu = E_m + E_n",
+        "why": "跃迁吸收或放出的能量是能级差，不是能级之和。"
+      }
+    ],
+    "relatedIds": [
+      "hydrogen_level",
+      "photon_energy",
+      "mass_defect_energy"
+    ],
+    "orderIndex": 88
+  },
+  {
+    "id": "hydrogen_level",
+    "title": "氢原子能级公式",
+    "module": "modern",
+    "chapter": "原子结构",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "E_n = \\frac{E_1}{n^2}",
+    "conditions": "氢原子能级模型，n 为主量子数（n = 1, 2, 3, …），E₁ 为基态能量，约为 −13.6 eV。能量为负表示原子束缚态。",
+    "variables": [
+      {
+        "symbol": "E_n",
+        "name": "第 n 能级能量",
+        "unit": "eV"
+      },
+      {
+        "symbol": "E_1",
+        "name": "基态能量",
+        "unit": "eV"
+      },
+      {
+        "symbol": "n",
+        "name": "主量子数",
+        "unit": "无单位"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "E_n = \\frac{E_1}{n}",
+        "why": "能级能量与 n² 成反比，不是与 n 成反比。"
+      },
+      {
+        "wrong": "E_n = E_1 n^2",
+        "why": "n 越大能级越高（越接近 0），但 E₁ 为负，公式是 E₁/n²。"
+      }
+    ],
+    "relatedIds": [
+      "energy_level",
+      "photon_energy",
+      "mass_energy"
+    ],
+    "orderIndex": 89
+  },
+  {
+    "id": "photon_momentum",
+    "title": "光子的动量",
+    "module": "modern",
+    "chapter": "波粒二象性",
+    "textbook": "人教版高中物理（2019 版）",
+    "latex": "p = \\frac{h}{\\lambda}",
+    "conditions": "光子的动量与波长成反比，h 为普朗克常量，λ 为真空中光的波长。光子没有静止质量，但具有动量。",
+    "variables": [
+      {
+        "symbol": "p",
+        "name": "光子动量",
+        "unit": "kg·m/s"
+      },
+      {
+        "symbol": "h",
+        "name": "普朗克常量",
+        "unit": "J·s"
+      },
+      {
+        "symbol": "\\lambda",
+        "name": "光的波长",
+        "unit": "m"
+      }
+    ],
+    "confusions": [
+      {
+        "wrong": "p = h\\lambda",
+        "why": "光子动量与波长成反比，应写成 h/λ。"
+      },
+      {
+        "wrong": "p = \\frac{\\lambda}{h}",
+        "why": "普朗克常量应在分子，波长在分母。"
+      }
+    ],
+    "relatedIds": [
+      "photon_energy",
+      "de_broglie",
+      "photoelectric"
+    ],
+    "orderIndex": 90
+  }
+]
