@@ -64,7 +64,6 @@ class UiScreenshotTest {
                     onOpenLibrary = {},
                     onOpenModule = {},
                     onOpenStats = {},
-                    onOpenSettings = {},
                 )
             }
         }

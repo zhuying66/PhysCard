@@ -65,7 +65,6 @@ class UiScreensTest {
                     onOpenLibrary = {},
                     onOpenModule = {},
                     onOpenStats = {},
-                    onOpenSettings = {},
                 )
             }
         }

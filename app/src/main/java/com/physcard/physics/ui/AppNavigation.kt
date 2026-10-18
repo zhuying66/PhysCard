@@ -98,7 +98,6 @@ fun PhysicsNavHost() {
                         navController.navigate("library?module=$moduleId")
                     },
                     onOpenStats = { navController.navigateRoot("stats") },
-                    onOpenSettings = { navController.navigateRoot("settings") },
                 )
             }
             composable(

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -20,11 +21,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.LocalFireDepartment
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,7 +44,6 @@ import com.physcard.physics.ui.components.AppCard
 import com.physcard.physics.ui.components.AppCardShape
 import com.physcard.physics.ui.components.AppPillShape
 import com.physcard.physics.ui.components.MiniProgress
-import com.physcard.physics.ui.components.OrbitMark
 import com.physcard.physics.ui.components.ProgressRing
 import com.physcard.physics.ui.components.SectionHeader
 import com.physcard.physics.ui.components.Spacing
@@ -63,7 +61,6 @@ fun HomeScreen(
     onOpenLibrary: () -> Unit,
     onOpenModule: (String) -> Unit,
     onOpenStats: () -> Unit,
-    onOpenSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scrollState = rememberScrollState()
@@ -78,13 +75,13 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .statusBarsPadding()
                 .verticalScroll(scrollState)
                 .padding(horizontal = Spacing.lg)
                 .padding(top = Spacing.sm, bottom = 108.dp),
         ) {
             HomeHeader(
                 streak = snapshot.streakDays,
-                onOpenSettings = onOpenSettings,
             )
             Spacer(Modifier.height(Spacing.xl))
             Text(
@@ -125,13 +122,11 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeHeader(streak: Int, onOpenSettings: () -> Unit) {
+private fun HomeHeader(streak: Int) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        OrbitMark(size = 34.dp)
-        Spacer(Modifier.width(Spacing.sm))
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = "物理公式记忆",
@@ -163,14 +158,6 @@ private fun HomeHeader(streak: Int, onOpenSettings: () -> Unit) {
                 text = "$streak 天",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
-            )
-        }
-        Spacer(Modifier.width(4.dp))
-        IconButton(onClick = onOpenSettings) {
-            Icon(
-                imageVector = Icons.Rounded.Settings,
-                contentDescription = "设置",
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }
