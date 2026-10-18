@@ -76,6 +76,7 @@ import com.physcard.physics.domain.session.StudyItem
 import com.physcard.physics.ui.components.AppBackground
 import com.physcard.physics.ui.components.AppCard
 import com.physcard.physics.ui.components.AppCardShape
+import com.physcard.physics.ui.components.AppContentMaxWidth
 import com.physcard.physics.ui.components.AppPillShape
 import com.physcard.physics.ui.components.EmptyState
 import com.physcard.physics.ui.components.Formula
@@ -135,10 +136,11 @@ fun StudyScreen(
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
-                .statusBarsPadding(),
+                .statusBarsPadding()
+                .navigationBarsPadding(),
             contentAlignment = Alignment.TopCenter,
         ) {
-            val contentWidth = maxWidth.coerceAtMost(680.dp)
+            val contentWidth = maxWidth.coerceAtMost(AppContentMaxWidth)
             Column(
                 modifier = Modifier
                     .width(contentWidth)
@@ -395,7 +397,6 @@ private fun IntroPane(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .navigationBarsPadding()
                 .padding(horizontal = Spacing.lg, vertical = Spacing.md),
         ) {
             Button(
@@ -466,8 +467,7 @@ private fun QuestionPane(
             state = listState,
             modifier = Modifier
                 .weight(1f)
-                .fillMaxWidth()
-                .navigationBarsPadding(),
+                .fillMaxWidth(),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(
                 start = Spacing.lg,
                 end = Spacing.lg,
@@ -908,8 +908,7 @@ private fun SummaryPane(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = Spacing.lg)
-            .padding(top = Spacing.xxl, bottom = Spacing.xxl)
-            .navigationBarsPadding(),
+            .padding(top = Spacing.xxl, bottom = Spacing.xxl),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         OrbitMark(size = 68.dp)

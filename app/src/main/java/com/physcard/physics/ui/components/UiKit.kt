@@ -8,15 +8,22 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.displayCutoutPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
@@ -66,6 +73,38 @@ object Spacing {
 val AppCardShape = RoundedCornerShape(22.dp)
 val AppSmallShape = RoundedCornerShape(14.dp)
 val AppPillShape = RoundedCornerShape(100.dp)
+
+/** Max content width so tablets / landscape phones keep a comfortable reading measure. */
+val AppContentMaxWidth: Dp = 680.dp
+
+/**
+ * One helper used by every screen: reserves space for the status bar and the navigation
+ * bar (3-button or gesture) plus any display cutout. All values come from the real window
+ * insets, so layouts stay clear of the system UI on any screen size, aspect ratio or notch.
+ *
+ * When [bottom] is false the navigation bar is not reserved (used by the tab screens whose
+ * bottom bar already handles it).
+ */
+@Composable
+fun Modifier.appSystemInsets(top: Boolean = true, bottom: Boolean = true): Modifier {
+    var result = this.displayCutoutPadding()
+    if (top) result = result.statusBarsPadding()
+    if (bottom) result = result.navigationBarsPadding()
+    return result
+}
+
+/**
+ * Bottom padding for scrollable lists: clears the app bottom bar ([AppBottomBarHeight]) and
+ * still respects the system navigation bar when it is larger than the bar inset.
+ */
+@Composable
+fun appListBottomPadding(extra: Dp = 0.dp): Dp {
+    val navBar = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+    return AppBottomBarHeight + navBar + extra
+}
+
+/** Height of the fixed bottom tab bar (excluding system navigation bar). */
+val AppBottomBarHeight: Dp = 108.dp
 
 @Composable
 fun AppBackground(

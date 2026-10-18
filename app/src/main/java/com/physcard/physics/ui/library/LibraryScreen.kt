@@ -11,9 +11,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -58,6 +58,8 @@ import com.physcard.physics.ui.components.LevelBadge
 import com.physcard.physics.ui.components.EmptyState
 import com.physcard.physics.ui.components.LoadingState
 import com.physcard.physics.ui.components.Spacing
+import com.physcard.physics.ui.components.appListBottomPadding
+import com.physcard.physics.ui.components.appSystemInsets
 import com.physcard.physics.ui.components.formulaPlainText
 import com.physcard.physics.ui.components.moduleAccent
 
@@ -108,7 +110,7 @@ fun LibraryScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .statusBarsPadding(),
+                .appSystemInsets(bottom = false),
         ) {
             Column(
                 modifier = Modifier.padding(horizontal = Spacing.lg, vertical = Spacing.sm),
@@ -213,7 +215,7 @@ fun LibraryScreen(
                         start = Spacing.lg,
                         end = Spacing.lg,
                         top = Spacing.xs,
-                        bottom = 108.dp,
+                        bottom = appListBottomPadding(),
                     ),
                     verticalArrangement = Arrangement.spacedBy(Spacing.sm),
                 ) {

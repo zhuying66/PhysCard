@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -47,6 +48,7 @@ import com.physcard.physics.domain.model.Formula
 import com.physcard.physics.ui.components.AppBackground
 import com.physcard.physics.ui.components.AppCard
 import com.physcard.physics.ui.components.AppCardShape
+import com.physcard.physics.ui.components.AppContentMaxWidth
 import com.physcard.physics.ui.components.AppPillShape
 import com.physcard.physics.ui.components.EmptyState
 import com.physcard.physics.ui.components.Formula
@@ -55,6 +57,7 @@ import com.physcard.physics.ui.components.LoadingState
 import com.physcard.physics.ui.components.SectionHeader
 import com.physcard.physics.ui.components.Spacing
 import com.physcard.physics.ui.components.ThinDivider
+import com.physcard.physics.ui.components.appSystemInsets
 import com.physcard.physics.ui.components.formatDue
 import com.physcard.physics.ui.components.levelColor
 import com.physcard.physics.ui.components.moduleAccent as accentFor
@@ -84,113 +87,124 @@ fun FormulaDetailScreen(
     modifier: Modifier = Modifier,
 ) {
     AppBackground(modifier) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .appSystemInsets(bottom = false),
+        ) {
             DetailTopBar(onBack = onBack, title = state.formula?.title ?: "公式详情")
-            when {
-                state.loading -> LoadingState(label = "正在读取公式…")
-                state.error != null -> EmptyState(
-                    title = "无法打开公式",
-                    message = state.error ?: "未知错误",
-                    actionLabel = "返回",
-                    onAction = onBack,
-                )
-                state.formula != null -> {
-                    val formula = state.formula
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .navigationBarsPadding(),
-                        contentPadding = androidx.compose.foundation.layout.PaddingValues(
-                            start = Spacing.lg,
-                            end = Spacing.lg,
-                            top = Spacing.xs,
-                            bottom = Spacing.xxl,
-                        ),
-                        verticalArrangement = Arrangement.spacedBy(Spacing.lg),
-                    ) {
-                        item {
-                            FormulaHero(
-                                formula = formula,
-                                moduleName = state.module?.name ?: formula.moduleId,
-                                moduleAccent = accentFor(state.module),
-                                averageLevel = state.averageLevel,
-                                introducedAbilities = state.introducedAbilities,
-                                onPractice = {
-                                    val weakest = state.abilities
-                                        .minByOrNull { it.state?.level ?: 0 }
-                                        ?: state.abilities.first()
-                                    onPractice(formula.id, weakest.ability)
-                                },
-                            )
-                        }
-                        item {
-                            Text(
-                                text = "适用条件",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onBackground,
-                            )
-                            Spacer(Modifier.height(Spacing.sm))
-                            AppCard(modifier = Modifier.fillMaxWidth()) {
-                                Text(
-                                    text = formula.conditions,
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .widthIn(max = AppContentMaxWidth)
+                    .align(Alignment.CenterHorizontally),
+            ) {
+                when {
+                    state.loading -> LoadingState(label = "正在读取公式…")
+                    state.error != null -> EmptyState(
+                        title = "无法打开公式",
+                        message = state.error ?: "未知错误",
+                        actionLabel = "返回",
+                        onAction = onBack,
+                    )
+                    state.formula != null -> {
+                        val formula = state.formula
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .navigationBarsPadding(),
+                            contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                                start = Spacing.lg,
+                                end = Spacing.lg,
+                                top = Spacing.xs,
+                                bottom = Spacing.xxl,
+                            ),
+                            verticalArrangement = Arrangement.spacedBy(Spacing.lg),
+                        ) {
+                            item {
+                                FormulaHero(
+                                    formula = formula,
+                                    moduleName = state.module?.name ?: formula.moduleId,
+                                    moduleAccent = accentFor(state.module),
+                                    averageLevel = state.averageLevel,
+                                    introducedAbilities = state.introducedAbilities,
+                                    onPractice = {
+                                        val weakest = state.abilities
+                                            .minByOrNull { it.state?.level ?: 0 }
+                                            ?: state.abilities.first()
+                                        onPractice(formula.id, weakest.ability)
+                                    },
                                 )
                             }
-                        }
-                        item {
-                            Text(
-                                text = "物理量",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onBackground,
-                            )
-                            Spacer(Modifier.height(Spacing.sm))
-                            VariableTable(formula)
-                        }
-                        if (formula.confusions.isNotEmpty()) {
                             item {
                                 Text(
-                                    text = "常见错误",
+                                    text = "适用条件",
                                     style = MaterialTheme.typography.titleMedium,
                                     color = MaterialTheme.colorScheme.onBackground,
                                 )
                                 Spacer(Modifier.height(Spacing.sm))
-                                Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-                                    formula.confusions.forEach { confusion ->
-                                        ConfusionCard(
-                                            wrong = confusion.wrong,
-                                            why = confusion.why,
-                                        )
+                                AppCard(modifier = Modifier.fillMaxWidth()) {
+                                    Text(
+                                        text = formula.conditions,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                }
+                            }
+                            item {
+                                Text(
+                                    text = "物理量",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                )
+                                Spacer(Modifier.height(Spacing.sm))
+                                VariableTable(formula)
+                            }
+                            if (formula.confusions.isNotEmpty()) {
+                                item {
+                                    Text(
+                                        text = "常见错误",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onBackground,
+                                    )
+                                    Spacer(Modifier.height(Spacing.sm))
+                                    Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                                        formula.confusions.forEach { confusion ->
+                                            ConfusionCard(
+                                                wrong = confusion.wrong,
+                                                why = confusion.why,
+                                            )
+                                        }
                                     }
                                 }
                             }
-                        }
-                        item {
-                            SectionHeader(
-                                title = "五种考查能力",
-                                subtitle = "每种能力独立安排复习，互不掩盖",
-                            )
-                        }
-                        items(state.abilities, key = { it.ability.wireName }) { status ->
-                            AbilityRow(
-                                status = status,
-                                onPractice = { onPractice(formula.id, status.ability) },
-                            )
-                        }
-                        if (state.related.isNotEmpty()) {
                             item {
-                                Text(
-                                    text = "相关公式",
-                                    style = MaterialTheme.typography.titleMedium,
-                                    color = MaterialTheme.colorScheme.onBackground,
+                                SectionHeader(
+                                    title = "五种考查能力",
+                                    subtitle = "每种能力独立安排复习，互不掩盖",
                                 )
-                                Spacer(Modifier.height(Spacing.sm))
-                                LazyRow(horizontalArrangement = Arrangement.spacedBy(Spacing.xs)) {
-                                    items(state.related, key = { it.id }) { related ->
-                                        RelatedFormulaChip(
-                                            formula = related,
-                                            onClick = { onOpenFormula(related.id) },
-                                        )
+                            }
+                            items(state.abilities, key = { it.ability.wireName }) { status ->
+                                AbilityRow(
+                                    status = status,
+                                    onPractice = { onPractice(formula.id, status.ability) },
+                                )
+                            }
+                            if (state.related.isNotEmpty()) {
+                                item {
+                                    Text(
+                                        text = "相关公式",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onBackground,
+                                    )
+                                    Spacer(Modifier.height(Spacing.sm))
+                                    LazyRow(horizontalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+                                        items(state.related, key = { it.id }) { related ->
+                                            RelatedFormulaChip(
+                                                formula = related,
+                                                onClick = { onOpenFormula(related.id) },
+                                            )
+                                        }
                                     }
                                 }
                             }

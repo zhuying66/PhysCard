@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -48,6 +47,8 @@ import com.physcard.physics.ui.components.ProgressRing
 import com.physcard.physics.ui.components.SectionHeader
 import com.physcard.physics.ui.components.Spacing
 import com.physcard.physics.ui.components.StatBlock
+import com.physcard.physics.ui.components.appListBottomPadding
+import com.physcard.physics.ui.components.appSystemInsets
 import com.physcard.physics.ui.components.formatShortDate
 import com.physcard.physics.ui.components.moduleAccent
 import java.time.LocalDate
@@ -75,10 +76,10 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .statusBarsPadding()
+                .appSystemInsets(bottom = false)
                 .verticalScroll(scrollState)
                 .padding(horizontal = Spacing.lg)
-                .padding(top = Spacing.sm, bottom = 108.dp),
+                .padding(top = Spacing.sm, bottom = appListBottomPadding()),
         ) {
             HomeHeader(
                 streak = snapshot.streakDays,

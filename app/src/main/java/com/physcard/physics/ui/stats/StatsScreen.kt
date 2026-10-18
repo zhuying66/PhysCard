@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
@@ -48,6 +47,8 @@ import com.physcard.physics.ui.components.EmptyState
 import com.physcard.physics.ui.components.MiniProgress
 import com.physcard.physics.ui.components.ProgressRing
 import com.physcard.physics.ui.components.Spacing
+import com.physcard.physics.ui.components.appListBottomPadding
+import com.physcard.physics.ui.components.appSystemInsets
 import com.physcard.physics.ui.components.levelColor
 import com.physcard.physics.ui.components.moduleAccent
 import java.time.Instant
@@ -74,12 +75,12 @@ fun StatsScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .statusBarsPadding(),
+                .appSystemInsets(bottom = false),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(
                 start = Spacing.lg,
                 end = Spacing.lg,
                 top = Spacing.sm,
-                bottom = 108.dp,
+                bottom = appListBottomPadding(),
             ),
             verticalArrangement = Arrangement.spacedBy(Spacing.lg),
         ) {
