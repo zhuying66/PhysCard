@@ -143,7 +143,11 @@ fun PhysicsNavHost() {
                     viewModel = detailViewModel,
                     onBack = { navController.popBackStack() },
                     onPractice = { id, ability ->
-                        navController.navigate("study?formulaId=$id&ability=${ability.wireName}")
+                        if (ability == null) {
+                            navController.navigate("study?formulaId=$id")
+                        } else {
+                            navController.navigate("study?formulaId=$id&ability=${ability.wireName}")
+                        }
                     },
                     onOpenFormula = { id -> navController.navigate("formula/$id") },
                 )

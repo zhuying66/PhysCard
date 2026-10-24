@@ -86,6 +86,41 @@ class AppDataIntegrationTest {
     }
 
     @Test
+    fun focusedPracticeCoversEveryAbilityOfTheFormula() = runBlocking(kotlinx.coroutines.Dispatchers.IO) {
+        val formulaId = app.container.contentRepository.getAllFormulas().first().id
+
+        val wholeSet = app.container.studyRepository.buildFocusedSession(formulaId, ability = null)
+        assertEquals(SessionMode.FOCUSED, wholeSet.mode)
+        assertEquals(5, wholeSet.items.size)
+        assertEquals(
+            listOf(
+                com.physcard.physics.domain.model.Ability.FULL_FORMULA,
+                com.physcard.physics.domain.model.Ability.FORMULA_FILL,
+                com.physcard.physics.domain.model.Ability.FORMULA_TRANSFORM,
+                com.physcard.physics.domain.model.Ability.APPLICABLE_CONDITION,
+                com.physcard.physics.domain.model.Ability.CONFUSION_DISCRIMINATION,
+            ),
+            wholeSet.items.map { it.ability },
+        )
+        assertTrue(wholeSet.items.all { it.formula.id == formulaId })
+        assertEquals(
+            "every item must be a distinct question",
+            wholeSet.items.size,
+            wholeSet.items.map { it.question.id }.toSet().size,
+        )
+
+        val single = app.container.studyRepository.buildFocusedSession(
+            formulaId,
+            ability = com.physcard.physics.domain.model.Ability.FORMULA_FILL,
+        )
+        assertEquals(1, single.items.size)
+        assertEquals(
+            com.physcard.physics.domain.model.Ability.FORMULA_FILL,
+            single.items.single().ability,
+        )
+    }
+
+    @Test
     fun exportContainsSeparatedQuestionAnswerAndOptions() = runBlocking(kotlinx.coroutines.Dispatchers.IO) {
         val payload = app.container.contentRepository.exportJson(BuildConfig.VERSION_NAME)
         assertTrue(payload.contains("\"schemaVersion\": 1"))

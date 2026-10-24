@@ -168,35 +168,48 @@ class StudyRepository(
         )
     }
 
+    /**
+     * Focused practice for a single formula.
+     *
+     * When [ability] is null the session covers every ability that has questions for this
+     * formula (the "专项练习" entry point), so the learner sees the whole test set instead of
+     * one question. When [ability] is set only that ability is practised (the per-ability row).
+     */
     suspend fun buildFocusedSession(formulaId: String, ability: Ability?): StudySession {
         ensureReviewStates()
         val formula = contentRepository.getFormula(formulaId)
             ?: throw ContentException("找不到该公式，可能已被移除。")
         val bank = contentRepository.questionBank()
         val states = reviewDao.getStatesForFormula(formulaId)
-        val targetState = if (ability != null) {
-            states.firstOrNull { it.ability == ability.wireName }
+        val statesByAbility = states.associateBy { it.ability }
+
+        val targets = if (ability != null) {
+            listOf(ability)
         } else {
-            states
-                .filter { bank.questions(formulaId, Ability.fromWire(it.ability)).isNotEmpty() }
-                .minWithOrNull(
-                    compareBy<ReviewStateEntity> { it.reviewCount > 0 }
-                        .thenBy { it.level }
-                        .thenBy { it.dueAt ?: 0 },
-                )
-        } ?: throw ContentException("这张公式卡还没有可用的练习题。")
-        val targetAbility = Ability.fromWire(targetState.ability)
-        val question = bank.questionFor(formulaId, targetAbility, targetState.reviewCount)
-            ?: throw ContentException("这道题暂时没有可用题目。")
-        val item = StudyItem(
-            formula = formula,
-            ability = targetAbility,
-            question = rotateOptions(question, targetState.reviewCount),
-            state = targetState.toDomain(),
-            isNewFormula = false,
-            showFormulaIntro = targetState.reviewCount == 0,
-        )
-        return StudySession(SessionMode.FOCUSED, listOf(item), clock.nowMillis())
+            Ability.entries.filter { bank.questions(formulaId, it).isNotEmpty() }
+        }
+        if (targets.isEmpty()) {
+            throw ContentException("这张公式卡还没有可用的练习题。")
+        }
+
+        val items = targets.mapNotNull { targetAbility ->
+            val targetState = statesByAbility[targetAbility.wireName]
+                ?: newStateEntity(formulaId, targetAbility, clock.nowMillis())
+            val question = bank.questionFor(formulaId, targetAbility, targetState.reviewCount)
+                ?: return@mapNotNull null
+            StudyItem(
+                formula = formula,
+                ability = targetAbility,
+                question = rotateOptions(question, targetState.reviewCount),
+                state = targetState.toDomain(),
+                isNewFormula = false,
+                showFormulaIntro = targetState.reviewCount == 0,
+            )
+        }
+        if (items.isEmpty()) {
+            throw ContentException("这道题暂时没有可用题目。")
+        }
+        return StudySession(SessionMode.FOCUSED, items, clock.nowMillis())
     }
 
     suspend fun previewIntervals(item: StudyItem): Map<ReviewRating, Long> =

@@ -66,7 +66,7 @@ import com.physcard.physics.ui.components.moduleAccent as accentFor
 fun FormulaDetailRoute(
     viewModel: FormulaDetailViewModel,
     onBack: () -> Unit,
-    onPractice: (String, Ability) -> Unit,
+    onPractice: (String, Ability?) -> Unit,
     onOpenFormula: (String) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -82,7 +82,7 @@ fun FormulaDetailRoute(
 fun FormulaDetailScreen(
     state: FormulaDetailUiState,
     onBack: () -> Unit,
-    onPractice: (String, Ability) -> Unit,
+    onPractice: (String, Ability?) -> Unit,
     onOpenFormula: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -129,10 +129,8 @@ fun FormulaDetailScreen(
                                     averageLevel = state.averageLevel,
                                     introducedAbilities = state.introducedAbilities,
                                     onPractice = {
-                                        val weakest = state.abilities
-                                            .minByOrNull { it.state?.level ?: 0 }
-                                            ?: state.abilities.first()
-                                        onPractice(formula.id, weakest.ability)
+                                        // Top button: practise the whole test set for this formula.
+                                        onPractice(formula.id, null)
                                     },
                                 )
                             }
