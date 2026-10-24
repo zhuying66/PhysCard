@@ -14,11 +14,6 @@
 - 浅色 / 深色 / 跟随系统，公式使用原生 Compose 排版。
 - 支持题库 JSON 导入/导出、重复检测、格式校验和明确的错误提示。
 
-## 界面
-
-| 首页 | 公式库 | 公式详情 |
-| --- | --- | --- |
-| ![](docs/screenshots/home-light.png) | ![](docs/screenshots/library.png) | ![](docs/screenshots/formula-detail.png) |
 
 ## 构建与运行
 
