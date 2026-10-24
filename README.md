@@ -91,7 +91,7 @@ python tools/generate_seed.py
 ```json
 {
   "schemaVersion": 1,
-  "appVersion": "1.5.0",
+  "appVersion": "1.6.0",
   "exportedAt": "2026-10-17T00:00:00Z",
   "formulas": [ ... ],
   "questions": [ ... ]

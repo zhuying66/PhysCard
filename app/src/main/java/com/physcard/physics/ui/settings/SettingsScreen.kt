@@ -23,6 +23,7 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.DeleteOutline
 import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.FileOpen
+import androidx.compose.material.icons.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material3.AlertDialog
@@ -45,6 +46,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -92,6 +94,7 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
 ) {
     var showResetDialog by remember { mutableStateOf(false) }
+    val context = LocalContext.current
     val exportLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CreateDocument("application/json"),
     ) { uri -> uri?.let(onExport) }
@@ -188,6 +191,16 @@ fun SettingsScreen(
                         destructive = true,
                         enabled = !working,
                         onClick = { showResetDialog = true },
+                    )
+                }
+            }
+            item {
+                SettingsSection(title = "关于与链接", icon = Icons.Rounded.OpenInNew) {
+                    LinkRow(
+                        title = "GitHub 项目主页",
+                        subtitle = "查看源码、更新日志与历史版本安装包",
+                        value = GITHUB_URL.removePrefix("https://"),
+                        onClick = { openUrl(context, GITHUB_URL) },
                     )
                 }
             }
@@ -543,3 +556,58 @@ private fun ThinSettingDivider() {
             .background(MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.55f)),
     )
 }
+
+/**
+ * A tappable row that leaves the app. The whole row is the tap target and the arrow hints
+ * that something opens outside this screen.
+ */
+@Composable
+private fun LinkRow(
+    title: String,
+    subtitle: String,
+    value: String,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .padding(Spacing.lg),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+            Text(
+                text = subtitle,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(3.dp))
+            Text(
+                text = value,
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary,
+            )
+        }
+        Spacer(Modifier.width(Spacing.sm))
+        Icon(
+            imageVector = Icons.Rounded.OpenInNew,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(18.dp),
+        )
+    }
+}
+
+/** Opens [url] in the user's browser. No INTERNET permission is needed for this. */
+private fun openUrl(context: android.content.Context, url: String) {
+    val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+        .addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+    runCatching { context.startActivity(intent) }
+}
+
+private const val GITHUB_URL = "https://github.com/zhuying66/PhysCard"
