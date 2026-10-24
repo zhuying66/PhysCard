@@ -6,7 +6,6 @@ import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performScrollTo
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,8 +13,8 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 /**
- * Regression coverage for bottom-bar navigation:
- * Home -> "公式库" entry -> bottom "首页" must return to the home destination.
+ * Regression coverage for bottom-bar navigation: every top-level tab must land on its own
+ * screen, and returning to 首页 must show the home content again.
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [35], application = PhysicsApp::class, qualifiers = "w411dp-h891dp-xxhdpi")
@@ -36,10 +35,11 @@ class NavigationRegressionTest {
     }
 
     @Test
-    fun homeLibraryEntryThenBottomHomeReturnsHome() {
+    fun bottomTabsNavigateBetweenScreens() {
         waitForHome()
 
-        compose.onNodeWithText("全部").performScrollTo().performClick()
+        // 首页已不再提供「公式库」入口，改由底部导航进入公式库
+        compose.onNodeWithTag("tab-library").performClick()
         waitForText("搜索公式、章节或符号")
 
         compose.onNodeWithTag("tab-home").performClick()

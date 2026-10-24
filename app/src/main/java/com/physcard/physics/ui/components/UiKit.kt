@@ -112,7 +112,11 @@ fun AppBackground(
     content: @Composable () -> Unit,
 ) {
     val background = MaterialTheme.colorScheme.background
-    val glow = MaterialTheme.colorScheme.primary.copy(alpha = if (isDarkUi()) 0.10f else 0.075f)
+    val dark = isDarkUi()
+    // Two offset glows (azure top-right, teal bottom-left) keep the paper from looking flat
+    // while staying far below text contrast.
+    val azureGlow = MaterialTheme.colorScheme.primary.copy(alpha = if (dark) 0.12f else 0.085f)
+    val tealGlow = MaterialTheme.colorScheme.secondary.copy(alpha = if (dark) 0.07f else 0.05f)
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -120,9 +124,16 @@ fun AppBackground(
             .drawBehind {
                 drawRect(
                     brush = Brush.radialGradient(
-                        colors = listOf(glow, Color.Transparent),
-                        center = Offset(size.width * 0.86f, size.height * 0.04f),
-                        radius = size.width * 0.82f,
+                        colors = listOf(azureGlow, Color.Transparent),
+                        center = Offset(size.width * 0.88f, size.height * 0.02f),
+                        radius = size.width * 0.78f,
+                    ),
+                )
+                drawRect(
+                    brush = Brush.radialGradient(
+                        colors = listOf(tealGlow, Color.Transparent),
+                        center = Offset(size.width * 0.06f, size.height * 0.42f),
+                        radius = size.width * 0.62f,
                     ),
                 )
                 drawRect(
@@ -411,16 +422,20 @@ fun DotSeparator(color: Color = MaterialTheme.colorScheme.outline) {
     )
 }
 
+/**
+ * Eight-step growth ramp: cold grey at the start, azure through the middle, teal and a warm
+ * amber at the top so mastery reads as "different", not just "more blue".
+ */
 fun levelColor(level: Int): Color {
     return when (level.coerceIn(1, 8)) {
-        1 -> Color(0xFF8C958D)
-        2 -> Color(0xFF6F9877)
-        3 -> Color(0xFF4E8B67)
-        4 -> Color(0xFF2E7A57)
-        5 -> Color(0xFF1E6B4A)
-        6 -> Color(0xFF3D7E8A)
-        7 -> Color(0xFF506F9A)
-        else -> Color(0xFFB1842F)
+        1 -> Color(0xFF9AA3B4)
+        2 -> Color(0xFF7E8AA0)
+        3 -> Color(0xFF5F7FC9)
+        4 -> Color(0xFF3D6BE0)
+        5 -> Color(0xFF2871FE)
+        6 -> Color(0xFF1E8FD6)
+        7 -> Color(0xFF0E8C8C)
+        else -> Color(0xFFB87A2B)
     }
 }
 

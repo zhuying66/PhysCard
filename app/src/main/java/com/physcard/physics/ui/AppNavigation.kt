@@ -93,10 +93,6 @@ fun PhysicsNavHost() {
                             navController.navigate("library")
                         }
                     },
-                    onOpenLibrary = { navController.navigate("library") },
-                    onOpenModule = { moduleId ->
-                        navController.navigate("library?module=$moduleId")
-                    },
                     onOpenStats = { navController.navigateRoot("stats") },
                 )
             }

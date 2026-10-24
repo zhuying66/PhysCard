@@ -14,8 +14,8 @@ android {
         applicationId = "com.physcard.physics"
         minSdk = 26
         targetSdk = 35
-        versionCode = 10200
-        versionName = "1.2.0"
+        versionCode = 10500
+        versionName = "1.5.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

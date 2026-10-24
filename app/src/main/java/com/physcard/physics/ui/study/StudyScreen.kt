@@ -552,11 +552,19 @@ private fun QuestionPane(
                 }
                 item {
                     if (onRate != null) {
-                        RatingPanel(
-                            state = state,
-                            wrong = state.isCorrect == false,
-                            onRate = onRate,
-                        )
+                        if (item.schedulesReview) {
+                            RatingPanel(
+                                state = state,
+                                wrong = state.isCorrect == false,
+                                onRate = onRate,
+                            )
+                        } else {
+                            DrillContinuePanel(
+                                saving = state.saving,
+                                errorMessage = state.errorMessage,
+                                onContinue = { onRate(ReviewRating.GOOD) },
+                            )
+                        }
                     }
                 }
             }
@@ -755,6 +763,44 @@ private fun FeedbackPanel(
 }
 
 @Composable
+private fun DrillContinuePanel(
+    saving: Boolean,
+    errorMessage: String?,
+    onContinue: () -> Unit,
+) {
+    Column(modifier = Modifier.padding(top = Spacing.md)) {
+        Text(
+            text = "加练题",
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onBackground,
+        )
+        Spacer(Modifier.height(2.dp))
+        Text(
+            text = "这一题只用来多练一遍，不影响复习间隔和记忆等级。",
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+        Spacer(Modifier.height(Spacing.md))
+        Button(
+            onClick = onContinue,
+            enabled = !saving,
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(14.dp),
+        ) {
+            Text(if (saving) "正在保存…" else "继续下一题")
+        }
+        if (errorMessage != null) {
+            Text(
+                text = errorMessage,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(top = Spacing.sm),
+            )
+        }
+    }
+}
+
+@Composable
 private fun RatingPanel(
     state: StudyUiState,
     wrong: Boolean,
@@ -852,10 +898,10 @@ private fun RatingButton(
         ReviewRating.AGAIN -> MaterialTheme.colorScheme.error
         ReviewRating.HARD -> MaterialTheme.colorScheme.tertiary
         ReviewRating.GOOD -> MaterialTheme.colorScheme.primary
-        ReviewRating.EASY -> Color(0xFF3D7E8A)
+        ReviewRating.EASY -> Color(0xFF0E8C8C)
     }
     val background = if (rating == ReviewRating.EASY && !isDarkUi()) {
-        Color(0xFFE8F2F3)
+        Color(0xFFDDF2F1)
     } else {
         accent.copy(alpha = 0.09f)
     }
@@ -1073,7 +1119,7 @@ private fun RatingDistribution(ratings: Map<ReviewRating, Int>) {
                                     ReviewRating.AGAIN -> MaterialTheme.colorScheme.error
                                     ReviewRating.HARD -> MaterialTheme.colorScheme.tertiary
                                     ReviewRating.GOOD -> MaterialTheme.colorScheme.primary
-                                    ReviewRating.EASY -> Color(0xFF3D7E8A)
+                                    ReviewRating.EASY -> Color(0xFF0E8C8C)
                                 },
                             ),
                     )

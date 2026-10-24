@@ -61,15 +61,13 @@ class UiScreenshotTest {
                 HomeScreen(
                     snapshot = sampleHome(),
                     onStartStudy = {},
-                    onOpenLibrary = {},
-                    onOpenModule = {},
                     onOpenStats = {},
                 )
             }
         }
         compose.onNodeWithText("物理公式记忆").assertIsDisplayed()
         compose.onNodeWithText("开始学习").assertIsDisplayed()
-        compose.onNodeWithText("公式库").assertIsDisplayed()
+        compose.onNodeWithText("学习统计").assertIsDisplayed()
         saveScreenshot("home-light")
     }
 

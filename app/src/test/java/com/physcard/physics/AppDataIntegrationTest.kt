@@ -38,8 +38,11 @@ class AppDataIntegrationTest {
         val formulas = app.container.contentRepository.getAllFormulas()
         assertEquals(91, formulas.size)
         val bank = app.container.contentRepository.questionBank()
-        assertEquals(455, app.container.database.questionDao().count())
-        assertEquals(1, bank.questions(formulas.first().id, com.physcard.physics.domain.model.Ability.FULL_FORMULA).size)
+        assertEquals(1365, app.container.database.questionDao().count())
+        assertEquals(
+            3,
+            bank.questions(formulas.first().id, com.physcard.physics.domain.model.Ability.FULL_FORMULA).size,
+        )
         assertTrue(bank.hasAllAbilities(formulas.first().id))
         assertEquals(455, app.container.database.reviewDao().getAllStates().size)
     }
@@ -60,6 +63,7 @@ class AppDataIntegrationTest {
             session.items.map { it.ability },
         )
         assertTrue(session.items.first().showFormulaIntro)
+        assertTrue(session.items.map { it.question.id }.toSet().size == session.items.size)
         val item = session.items.first()
         val correct = item.question.correctIndex
         val outcome = app.container.studyRepository.recordReview(
@@ -86,38 +90,79 @@ class AppDataIntegrationTest {
     }
 
     @Test
-    fun focusedPracticeCoversEveryAbilityOfTheFormula() = runBlocking(kotlinx.coroutines.Dispatchers.IO) {
+    fun focusedPracticeCoversEveryAbilityAndEveryVariant() = runBlocking(kotlinx.coroutines.Dispatchers.IO) {
         val formulaId = app.container.contentRepository.getAllFormulas().first().id
+        val abilities = listOf(
+            com.physcard.physics.domain.model.Ability.FULL_FORMULA,
+            com.physcard.physics.domain.model.Ability.FORMULA_FILL,
+            com.physcard.physics.domain.model.Ability.FORMULA_TRANSFORM,
+            com.physcard.physics.domain.model.Ability.APPLICABLE_CONDITION,
+            com.physcard.physics.domain.model.Ability.CONFUSION_DISCRIMINATION,
+        )
 
         val wholeSet = app.container.studyRepository.buildFocusedSession(formulaId, ability = null)
         assertEquals(SessionMode.FOCUSED, wholeSet.mode)
-        assertEquals(5, wholeSet.items.size)
-        assertEquals(
-            listOf(
-                com.physcard.physics.domain.model.Ability.FULL_FORMULA,
-                com.physcard.physics.domain.model.Ability.FORMULA_FILL,
-                com.physcard.physics.domain.model.Ability.FORMULA_TRANSFORM,
-                com.physcard.physics.domain.model.Ability.APPLICABLE_CONDITION,
-                com.physcard.physics.domain.model.Ability.CONFUSION_DISCRIMINATION,
-            ),
-            wholeSet.items.map { it.ability },
-        )
+        // 5 abilities x 3 variants each.
+        assertEquals(15, wholeSet.items.size)
+        assertEquals(abilities, wholeSet.items.map { it.ability }.distinct())
         assertTrue(wholeSet.items.all { it.formula.id == formulaId })
         assertEquals(
             "every item must be a distinct question",
             wholeSet.items.size,
             wholeSet.items.map { it.question.id }.toSet().size,
         )
+        // Exactly the first variant of each ability drives FSRS.
+        assertEquals(5, wholeSet.items.count { it.schedulesReview })
+        assertEquals(
+            abilities,
+            wholeSet.items.filter { it.schedulesReview }.map { it.ability },
+        )
 
         val single = app.container.studyRepository.buildFocusedSession(
             formulaId,
             ability = com.physcard.physics.domain.model.Ability.FORMULA_FILL,
         )
-        assertEquals(1, single.items.size)
-        assertEquals(
-            com.physcard.physics.domain.model.Ability.FORMULA_FILL,
-            single.items.single().ability,
+        assertEquals(3, single.items.size)
+        assertTrue(single.items.all { it.ability == com.physcard.physics.domain.model.Ability.FORMULA_FILL })
+        assertEquals(1, single.items.count { it.schedulesReview })
+    }
+
+    @Test
+    fun drillVariantsDoNotAdvanceTheSchedule() = runBlocking(kotlinx.coroutines.Dispatchers.IO) {
+        val formulaId = app.container.contentRepository.getAllFormulas().first().id
+        val session = app.container.studyRepository.buildFocusedSession(formulaId, ability = null)
+        val first = session.items.first { it.schedulesReview }
+        val drills = session.items.filter { !it.schedulesReview }
+
+        val scheduled = app.container.studyRepository.recordReview(
+            item = first,
+            rating = ReviewRating.GOOD,
+            correct = true,
+            selectedOption = first.question.correctIndex,
+            durationMs = 5_000,
         )
+        assertTrue(scheduled.scheduled)
+        val dueAfterScheduled = scheduled.state.dueAt
+        val levelAfterScheduled = scheduled.state.level
+
+        val drill = drills.first()
+        val drillOutcome = app.container.studyRepository.recordReview(
+            item = drill,
+            rating = ReviewRating.GOOD,
+            correct = true,
+            selectedOption = drill.question.correctIndex,
+            durationMs = 5_000,
+        )
+        assertTrue("drill answers must not schedule a review", !drillOutcome.scheduled)
+        assertEquals(0L, drillOutcome.fsrs.intervalMinutes)
+        // The card's due date and level stay exactly where the scheduled answer left them.
+        val stateNow = app.container.database.reviewDao()
+            .getState(com.physcard.physics.data.repository.StudyRepository.cardKey(formulaId, drill.ability))
+        assertNotNull(stateNow)
+        assertEquals(dueAfterScheduled, stateNow!!.dueAt)
+        assertEquals(levelAfterScheduled, stateNow.level)
+        // The drill answer is still logged so daily accuracy stays truthful.
+        assertTrue(app.container.database.reviewDao().getAllLogs().size >= 2)
     }
 
     @Test

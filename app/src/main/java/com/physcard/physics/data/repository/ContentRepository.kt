@@ -106,13 +106,25 @@ class ContentRepository(
         ensureModules()
         val bundle = seedLoader.loadBuiltIn()
         val wasFirstSeed = formulaDao.count() == 0
-        val questionIds = bundle.questions.map { it.id }
+        val builtInFormulaIds = bundle.formulas.map { it.id }.toSet()
+        val incomingQuestionIds = bundle.questions.map { it.id }.toSet()
+        // Question ids carry a per-variant suffix, so ids from an older bundle no longer
+        // match. Delete every stored question that belongs to a built-in formula and is not
+        // part of the incoming bundle, otherwise an upgrade would keep the stale rows and
+        // show duplicate questions. Custom imported questions are left untouched.
+        val staleQuestionIds = questionDao.getAll()
+            .filter { it.formulaId in builtInFormulaIds && it.id !in incomingQuestionIds }
+            .map { it.id }
         database.withTransaction {
             formulaDao.upsertAll(bundle.formulas.map { it.toEntity() })
-            if (questionIds.isNotEmpty()) {
+            // Chunked deletes: a full bundle has >1000 ids, beyond SQLite's bind-variable cap.
+            staleQuestionIds.chunked(DELETE_CHUNK).forEach { questionDao.deleteQuestions(it) }
+            if (incomingQuestionIds.isNotEmpty()) {
                 // Replace built-in question bundles so fixes to wording or answers land on
                 // upgrade, while review states and history remain attached to formulas.
-                questionDao.deleteQuestions(questionIds)
+                incomingQuestionIds.toList().chunked(DELETE_CHUNK).forEach {
+                    questionDao.deleteQuestions(it)
+                }
                 insertQuestions(bundle.questions)
             }
         }
@@ -428,7 +440,12 @@ class ContentRepository(
     }
 
     companion object {
-        const val SEED_VERSION = 2
+        // Bumped when the bundled question bank grows so existing installs re-seed the
+        // expanded bank on upgrade while keeping review states and history.
+        const val SEED_VERSION = 3
         const val SCHEMA_VERSION = 1
+
+        /** SQLite rejects statements with more bind variables than this. */
+        private const val DELETE_CHUNK = 400
     }
 }

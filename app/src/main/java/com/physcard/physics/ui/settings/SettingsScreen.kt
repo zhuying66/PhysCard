@@ -496,7 +496,7 @@ private fun AboutCard(settings: AppSettings) {
             }
             Spacer(Modifier.height(Spacing.md))
             Text(
-                text = "内容依据人教版高中物理（2019 版）必修与选择性必修教材的知识体系整理，共 91 个核心公式、455 道选择题。公式与解析均内置，不依赖网络。",
+                text = "内容依据人教版高中物理（2019 版）必修与选择性必修教材的知识体系整理，共 91 个核心公式、1365 道选择题（每个公式的每种能力各 3 道）。公式与解析均内置，不依赖网络。",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

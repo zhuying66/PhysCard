@@ -45,7 +45,7 @@ class ContentImportTest {
         assertEquals(0, report.importedFormulas)
         assertEquals(0, report.importedQuestions)
         assertEquals(91, report.skippedFormulas)
-        assertEquals(455, report.skippedQuestions)
+        assertEquals(1365, report.skippedQuestions)
         assertEquals(91, app.container.contentRepository.getAllFormulas().size)
     }
 
@@ -59,7 +59,7 @@ class ContentImportTest {
         app.container.studyRepository.ensureReviewStates()
         assertEquals(92, app.container.contentRepository.getAllFormulas().size)
         assertEquals(460, app.container.database.reviewDao().getAllStates().size)
-        assertEquals(460, app.container.database.questionDao().count())
+        assertEquals(1370, app.container.database.questionDao().count())
 
         val duplicate = app.container.contentRepository.importJson(encoded)
         assertEquals(0, duplicate.importedFormulas)

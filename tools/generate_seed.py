@@ -38,13 +38,15 @@ ALL = (
     + OPTICS_MODERN
 )
 
+# Accents stay in the icon's palette family (azure -> teal -> amber) so the module chips
+# read as one system instead of six unrelated colours.
 MODULES = [
-    ("mechanics", "力学", "运动、力、能量与动量", "#2F6F55"),
-    ("waves", "振动与波", "简谐运动与机械波", "#4F6E9C"),
-    ("thermal", "热学", "分子动理论与气体定律", "#B56A3A"),
-    ("electromagnetism", "电磁学", "电场、电路、磁场与电磁感应", "#8A5B8E"),
-    ("optics", "光学", "几何光学与光的波动性", "#3E7C8B"),
-    ("modern", "近代物理", "原子、原子核与波粒二象性", "#A05252"),
+    ("mechanics", "力学", "运动、力、能量与动量", "#2871FE"),
+    ("waves", "振动与波", "简谐运动与机械波", "#1E7FD6"),
+    ("thermal", "热学", "分子动理论与气体定律", "#0E8C8C"),
+    ("electromagnetism", "电磁学", "电场、电路、磁场与电磁感应", "#4A5FD0"),
+    ("optics", "光学", "几何光学与光的波动性", "#2B93A8"),
+    ("modern", "近代物理", "原子、原子核与波粒二象性", "#B87A2B"),
 ]
 
 ABILITIES = [
@@ -169,6 +171,29 @@ def option(latex: str | None = None, text: str | None = None) -> dict:
     return value
 
 
+def pick_unique(candidates: list[dict], exclude: set[str], count: int, label: str) -> list[dict]:
+    """Return [count] distractors that never repeat the answer or each other.
+
+    Distractors are always taken from real authoring data (sibling formulas or the
+    formula's own confusion list), never invented, so a wrong option is always a
+    mistake a student could genuinely make.
+    """
+    picked: list[dict] = []
+    for item in candidates:
+        key = item.get("latex") or item.get("text")
+        if not key or key in exclude:
+            continue
+        exclude.add(key)
+        picked.append(item)
+        if len(picked) == count:
+            return picked
+    raise ValueError(f"{label}: only {len(picked)} unique distractors available, need {count}")
+
+
+def all_confusion_whys() -> list[dict]:
+    return [option(text=confusion.why) for formula in ALL for confusion in formula.confusions]
+
+
 def find_formula(formula_id: str) -> FormulaSeed:
     for formula in ALL:
         if formula.id == formula_id:
@@ -261,121 +286,249 @@ def validate() -> None:
         raise SystemExit(1)
 
 
-def build_questions(formula: FormulaSeed, order_index: int) -> list[dict]:
-    related = related_formulas(formula)
-    wrong_options = [option(latex=item.latex) for item in related]
-    correct_formula = option(latex=formula.latex)
+def _distinct_rotations(pool: list, size: int, wanted: int, offset: int = 0) -> list[list]:
+    """Yield up to [wanted] genuinely different combinations drawn from [pool].
 
+    Two combinations count as the same when they contain the same members, so the
+    result never repeats an option set with only the order changed.
+    """
+    total = len(pool)
+    if total < size:
+        return []
+    seen: set[tuple[str, ...]] = set()
+    result: list[list] = []
+    for step in range(total):
+        indices = [(offset + step + shift) % total for shift in range(size)]
+        if len(set(indices)) != size:
+            continue
+        members = [pool[index] for index in indices]
+        key = tuple(sorted(_member_key(member) for member in members))
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append(members)
+        if len(result) == wanted:
+            break
+    return result
+
+
+def _member_key(member) -> str:
+    if isinstance(member, FormulaSeed):
+        return member.id
+    return member.get("latex") or member.get("text") or ""
+
+
+def build_questions(formula: FormulaSeed, order_index: int) -> list[dict]:
+    """Emit every question variant the authoring data can support for one formula.
+
+    Each ability yields several questions instead of one. All options come from authored
+    content (sibling formulas, the formula's own confusion list, its written condition
+    distractors, or another formula's condition distractors) — nothing is invented, so a
+    wrong option is always a mistake a student could really make.
+    """
+    related = related_formulas(formula)
+    correct_formula = option(latex=formula.latex)
     questions: list[dict] = []
 
-    # A. Complete formula selection.
-    options = [correct_formula] + wrong_options
-    options, correct_index = shuffled_with_correct(options, 0, formula.id + ":full")
-    other_names = "、".join(f"「{item.title}」" for item in related)
-    questions.append(
-        {
-            "id": f"q_{formula.id}_full",
-            "formulaId": formula.id,
-            "ability": "FULL_FORMULA",
-            "prompt": PROMPT_VARIANTS["FULL_FORMULA"][order_index % 2].format(title=formula.title),
-            "options": unique_options(options, formula.id + ":full"),
-            "correctIndex": correct_index,
-            "explanation": (
-                f"{formula.title}的标准形式是 {plain_latex(formula.latex)}。"
-                f"另外三个选项分别对应{other_names}，变量含义和适用情境并不相同。"
-                f"使用条件：{formula.conditions}"
-            ),
-        }
-    )
+    # Distractor candidates, nearest first: same chapter, then same module.
+    same_chapter = [
+        candidate
+        for candidate in ALL
+        if candidate.module == formula.module
+        and candidate.chapter == formula.chapter
+        and candidate.id != formula.id
+    ]
+    same_module = [
+        candidate
+        for candidate in ALL
+        if candidate.module == formula.module
+        and candidate.id != formula.id
+        and candidate not in same_chapter
+    ]
+    formula_pool: list[FormulaSeed] = []
+    for candidate in related + same_chapter + same_module:
+        if candidate.id != formula.id and candidate not in formula_pool:
+            formula_pool.append(candidate)
 
-    # B. Formula fill-in.
+    # ---------------------------------------------------------------- A. 完整公式
+    for index, distractors in enumerate(_distinct_rotations(formula_pool, 3, 3)):
+        tag = chr(ord("a") + index)
+        options = [correct_formula] + [option(latex=item.latex) for item in distractors]
+        ordered, correct_index = shuffled_with_correct(options, 0, formula.id + ":full:" + tag)
+        names = "、".join(f"「{item.title}」" for item in distractors)
+        questions.append(
+            {
+                "id": f"q_{formula.id}_full_{tag}",
+                "formulaId": formula.id,
+                "ability": "FULL_FORMULA",
+                "prompt": PROMPT_VARIANTS["FULL_FORMULA"][(order_index + index) % 2].format(
+                    title=formula.title
+                ),
+                "options": unique_options(ordered, formula.id + ":full:" + tag),
+                "correctIndex": correct_index,
+                "explanation": (
+                    f"{formula.title}的标准形式是 {plain_latex(formula.latex)}。"
+                    f"另外三个选项分别对应{names}，变量含义和适用情境并不相同。"
+                    f"使用条件：{formula.conditions}"
+                ),
+            }
+        )
+
+    # ---------------------------------------------------------------- B. 公式填空
     fill_alt = formula.fill_alt or []
     if len(fill_alt) < 3:
         raise ValueError(f"{formula.id}: needs 3 fill alternatives")
-    options = [option(latex=formula.fill_answer)] + [option(latex=item) for item in fill_alt[:3]]
-    options, correct_index = shuffled_with_correct(options, 0, formula.id + ":fill")
-    questions.append(
-        {
-            "id": f"q_{formula.id}_fill",
-            "formulaId": formula.id,
-            "ability": "FORMULA_FILL",
-            "prompt": PROMPT_VARIANTS["FORMULA_FILL"][order_index % 2],
-            "stimulusLatex": formula.fill_masked,
-            "options": unique_options(options, formula.id + ":fill"),
-            "correctIndex": correct_index,
-            "explanation": (
-                f"补全后的公式为 {plain_latex(formula.latex)}，空缺处是 {plain_latex(formula.fill_answer)}。"
-                f"其他选项改变了运算结构或系数，会导致量纲或数量关系错误。"
-                f"适用条件：{formula.conditions}"
-            ),
-        }
-    )
+    # The blank asks for one fragment of this formula. Distractors are authored wrong
+    # fragments: this formula's own alternatives first, then same-chapter and same-module
+    # neighbours (a student who mixes up related formulas really does produce these).
+    fill_candidates = [option(latex=item) for item in fill_alt]
+    for other in same_chapter + same_module:
+        for item in other.fill_alt or []:
+            fill_candidates.append(option(latex=item))
+    fill_deduped: list[dict] = []
+    for candidate in fill_candidates:
+        key = candidate["latex"]
+        if key == formula.fill_answer:
+            continue
+        if any(existing["latex"] == key for existing in fill_deduped):
+            continue
+        fill_deduped.append(candidate)
+    fill_pools = _distinct_rotations(fill_deduped, 3, 3)
+    if not fill_pools:
+        raise ValueError(f"{formula.id}: fill alternatives cannot form a pool")
+    for index, distractors in enumerate(fill_pools):
+        tag = chr(ord("a") + index)
+        options = [option(latex=formula.fill_answer)] + distractors
+        ordered, correct_index = shuffled_with_correct(options, 0, formula.id + ":fill:" + tag)
+        questions.append(
+            {
+                "id": f"q_{formula.id}_fill_{tag}",
+                "formulaId": formula.id,
+                "ability": "FORMULA_FILL",
+                "prompt": PROMPT_VARIANTS["FORMULA_FILL"][(order_index + index) % 2],
+                "stimulusLatex": formula.fill_masked,
+                "options": unique_options(ordered, formula.id + ":fill:" + tag),
+                "correctIndex": correct_index,
+                "explanation": (
+                    f"补全后的公式为 {plain_latex(formula.latex)}，空缺处是 {plain_latex(formula.fill_answer)}。"
+                    f"其他选项改变了运算结构或系数，会导致量纲或数量关系错误。"
+                    f"适用条件：{formula.conditions}"
+                ),
+            }
+        )
 
-    # C. Formula rearrangement.
+    # ---------------------------------------------------------------- C. 公式变形
     transform_alt = formula.transform_alt or []
     if len(transform_alt) < 3:
         raise ValueError(f"{formula.id}: needs 3 transform alternatives")
-    options = [option(latex=formula.transform_correct)] + [option(latex=item) for item in transform_alt[:3]]
-    options, correct_index = shuffled_with_correct(options, 0, formula.id + ":transform")
-    questions.append(
-        {
-            "id": f"q_{formula.id}_transform",
-            "formulaId": formula.id,
-            "ability": "FORMULA_TRANSFORM",
-            "prompt": PROMPT_VARIANTS["FORMULA_TRANSFORM"][order_index % 2].format(
-                target=plain_latex(formula.transform_target)
-            ),
-            "stimulusLatex": formula.latex,
-            "options": unique_options(options, formula.id + ":transform"),
-            "correctIndex": correct_index,
-            "explanation": (
-                f"由 {plain_latex(formula.latex)} 解得 {plain_latex(formula.transform_correct)}。"
-                f"注意移项、除以系数和开平方时不能改变等式关系。"
-            ),
-        }
-    )
+    # Rearranging this formula. Distractors are authored wrong rearrangements: this
+    # formula's own first, then neighbours from the same chapter and module.
+    transform_candidates = [option(latex=item) for item in transform_alt]
+    for other in same_chapter + same_module:
+        for item in other.transform_alt or []:
+            transform_candidates.append(option(latex=item))
+    transform_deduped: list[dict] = []
+    for candidate in transform_candidates:
+        key = candidate["latex"]
+        if key == formula.transform_correct:
+            continue
+        if any(existing["latex"] == key for existing in transform_deduped):
+            continue
+        transform_deduped.append(candidate)
+    transform_pools = _distinct_rotations(transform_deduped, 3, 3)
+    if not transform_pools:
+        raise ValueError(f"{formula.id}: transform alternatives cannot form a pool")
+    for index, distractors in enumerate(transform_pools):
+        tag = chr(ord("a") + index)
+        options = [option(latex=formula.transform_correct)] + distractors
+        ordered, correct_index = shuffled_with_correct(options, 0, formula.id + ":transform:" + tag)
+        questions.append(
+            {
+                "id": f"q_{formula.id}_transform_{tag}",
+                "formulaId": formula.id,
+                "ability": "FORMULA_TRANSFORM",
+                "prompt": PROMPT_VARIANTS["FORMULA_TRANSFORM"][(order_index + index) % 2].format(
+                    target=plain_latex(formula.transform_target)
+                ),
+                "stimulusLatex": formula.latex,
+                "options": unique_options(ordered, formula.id + ":transform:" + tag),
+                "correctIndex": correct_index,
+                "explanation": (
+                    f"由 {plain_latex(formula.latex)} 解得 {plain_latex(formula.transform_correct)}。"
+                    f"注意移项、除以系数和开平方时不能改变等式关系。"
+                ),
+            }
+        )
 
-    # D. Applicable condition.
-    options = [option(text=formula.conditions)] + [option(text=item) for item in formula.cond_wrong]
-    options, correct_index = shuffled_with_correct(options, 0, formula.id + ":condition")
-    questions.append(
-        {
-            "id": f"q_{formula.id}_condition",
-            "formulaId": formula.id,
-            "ability": "APPLICABLE_CONDITION",
-            "prompt": PROMPT_VARIANTS["APPLICABLE_CONDITION"][order_index % 2].format(
-                title=formula.title
-            ),
-            "stimulusLatex": formula.latex,
-            "options": unique_options(options, formula.id + ":condition"),
-            "correctIndex": correct_index,
-            "explanation": (
-                f"正确表述：{formula.conditions} "
-                f"其余选项都越过了公式的适用范围，或把符号、单位和因果关系弄反了。"
-            ),
-        }
-    )
+    # ---------------------------------------------------------------- D. 适用条件
+    # Wrong statements come from: this formula's own written distractors, this formula's
+    # confusion explanations, then other formulas' condition distractors (same module
+    # first). All of them are real misstatements, never invented text.
+    condition_candidates: list[dict] = []
+    for text in formula.cond_wrong:
+        condition_candidates.append(option(text=text))
+    for confusion in formula.confusions:
+        condition_candidates.append(option(text=confusion.why))
+    for other in same_chapter + same_module:
+        for text in other.cond_wrong:
+            condition_candidates.append(option(text=text))
+    deduped: list[dict] = []
+    for candidate in condition_candidates:
+        text = candidate["text"]
+        if text == formula.conditions:
+            continue
+        if any(existing["text"] == text for existing in deduped):
+            continue
+        deduped.append(candidate)
+    condition_pools = _distinct_rotations(deduped, 3, 3)
+    if not condition_pools:
+        raise ValueError(f"{formula.id}: no condition distractors available")
+    for index, distractors in enumerate(condition_pools):
+        tag = chr(ord("a") + index)
+        options = [option(text=formula.conditions)] + distractors
+        ordered, correct_index = shuffled_with_correct(options, 0, formula.id + ":condition:" + tag)
+        questions.append(
+            {
+                "id": f"q_{formula.id}_condition_{tag}",
+                "formulaId": formula.id,
+                "ability": "APPLICABLE_CONDITION",
+                "prompt": PROMPT_VARIANTS["APPLICABLE_CONDITION"][(order_index + index) % 2].format(
+                    title=formula.title
+                ),
+                "stimulusLatex": formula.latex,
+                "options": unique_options(ordered, formula.id + ":condition:" + tag),
+                "correctIndex": correct_index,
+                "explanation": (
+                    f"正确表述：{formula.conditions} "
+                    f"其余选项都越过了公式的适用范围，或把符号、单位和因果关系弄反了。"
+                ),
+            }
+        )
 
-    # E. Confusion discrimination.
-    options = [correct_formula] + wrong_options
-    options, correct_index = shuffled_with_correct(options, 0, formula.id + ":discriminate")
-    questions.append(
-        {
-            "id": f"q_{formula.id}_discriminate",
-            "formulaId": formula.id,
-            "ability": "CONFUSION_DISCRIMINATION",
-            "prompt": PROMPT_VARIANTS["CONFUSION_DISCRIMINATION"][order_index % 2].format(
-                scene=formula.scene
-            ),
-            "options": unique_options(options, formula.id + ":discriminate"),
-            "correctIndex": correct_index,
-            "explanation": (
-                f"该情境对应「{formula.title}」，公式为 {plain_latex(formula.latex)}。"
-                f"其他选项来自相近但不同的物理规律，不能直接套用。"
-                f"关键条件：{formula.conditions}"
-            ),
-        }
-    )
+    # ---------------------------------------------------------------- E. 易混辨析
+    for index, distractors in enumerate(_distinct_rotations(formula_pool, 3, 3, offset=1)):
+        tag = chr(ord("a") + index)
+        options = [correct_formula] + [option(latex=item.latex) for item in distractors]
+        ordered, correct_index = shuffled_with_correct(
+            options, 0, formula.id + ":discriminate:" + tag
+        )
+        questions.append(
+            {
+                "id": f"q_{formula.id}_discriminate_{tag}",
+                "formulaId": formula.id,
+                "ability": "CONFUSION_DISCRIMINATION",
+                "prompt": PROMPT_VARIANTS["CONFUSION_DISCRIMINATION"][(order_index + index) % 2].format(
+                    scene=formula.scene
+                ),
+                "options": unique_options(ordered, formula.id + ":discriminate:" + tag),
+                "correctIndex": correct_index,
+                "explanation": (
+                    f"该情境对应「{formula.title}」，公式为 {plain_latex(formula.latex)}。"
+                    f"其他选项来自相近但不同的物理规律，不能直接套用。"
+                    f"关键条件：{formula.conditions}"
+                ),
+            }
+        )
 
     return questions
 

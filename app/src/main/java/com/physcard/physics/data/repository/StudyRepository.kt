@@ -40,6 +40,8 @@ data class ReviewOutcome(
     val state: ReviewState,
     val level: LevelUpdate,
     val fsrs: FsrsReviewResult,
+    /** False when the answer was extra drilling and left the FSRS schedule untouched. */
+    val scheduled: Boolean = true,
 )
 
 class StudyRepository(
@@ -171,9 +173,12 @@ class StudyRepository(
     /**
      * Focused practice for a single formula.
      *
-     * When [ability] is null the session covers every ability that has questions for this
-     * formula (the "专项练习" entry point), so the learner sees the whole test set instead of
-     * one question. When [ability] is set only that ability is practised (the per-ability row).
+     * When [ability] is null the session covers every ability of the formula; when it is set
+     * only that ability is drilled. Either way every available question variant is included,
+     * so the learner works through the whole test set rather than a single question.
+     *
+     * Only the first variant of each ability updates the FSRS schedule (see
+     * [StudyItem.schedulesReview]); the remaining variants are extra practice.
      */
     suspend fun buildFocusedSession(formulaId: String, ability: Ability?): StudySession {
         ensureReviewStates()
@@ -192,19 +197,27 @@ class StudyRepository(
             throw ContentException("这张公式卡还没有可用的练习题。")
         }
 
-        val items = targets.mapNotNull { targetAbility ->
+        val items = mutableListOf<StudyItem>()
+        var introPlaced = false
+        targets.forEach { targetAbility ->
             val targetState = statesByAbility[targetAbility.wireName]
                 ?: newStateEntity(formulaId, targetAbility, clock.nowMillis())
-            val question = bank.questionFor(formulaId, targetAbility, targetState.reviewCount)
-                ?: return@mapNotNull null
-            StudyItem(
-                formula = formula,
-                ability = targetAbility,
-                question = rotateOptions(question, targetState.reviewCount),
-                state = targetState.toDomain(),
-                isNewFormula = false,
-                showFormulaIntro = targetState.reviewCount == 0,
-            )
+            val variants = bank.questions(formulaId, targetAbility)
+            if (variants.isEmpty()) return@forEach
+            variants.forEachIndexed { variantIndex, question ->
+                val showIntro = !introPlaced
+                if (showIntro) introPlaced = true
+                items += StudyItem(
+                    formula = formula,
+                    ability = targetAbility,
+                    question = rotateOptions(question, targetState.reviewCount + variantIndex),
+                    state = targetState.toDomain(),
+                    isNewFormula = false,
+                    showFormulaIntro = showIntro,
+                    // First variant drives FSRS; the rest are drilling only.
+                    schedulesReview = variantIndex == 0,
+                )
+            }
         }
         if (items.isEmpty()) {
             throw ContentException("这道题暂时没有可用题目。")
@@ -228,6 +241,60 @@ class StudyRepository(
         val current = currentEntity.toDomain()
         val wasFirstReview = current.reviewCount == 0
         val formulaFirstReview = reviewDao.reviewedAbilityCount(item.formula.id) == 0
+
+        if (!item.schedulesReview) {
+            // Extra practice on the same card: record that the answer happened (so daily
+            // counters and accuracy stay truthful) but keep FSRS state, due date and level
+            // untouched — three variants in one sitting must not count as three reviews.
+            val drillCorrectAfter = current.correctCount + if (correct) 1 else 0
+            val drillEntity = currentEntity.copy(
+                introduced = true,
+                correctCount = drillCorrectAfter,
+                updatedAt = now,
+            )
+            val drillLog = ReviewLogEntity(
+                cardKey = current.cardKey,
+                formulaId = item.formula.id,
+                ability = item.ability.wireName,
+                reviewedAt = now,
+                localDate = clock.dayKey(Instant.ofEpochMilli(now)),
+                rating = rating.wireName,
+                correct = correct,
+                selectedOption = selectedOption,
+                correctOption = item.question.correctIndex,
+                scheduledMinutes = 0,
+                elapsedDays = clock.elapsedDays(currentEntity.lastReviewAt, now),
+                levelBefore = current.level,
+                levelAfter = current.level,
+                stabilityAfter = currentEntity.stability,
+                difficultyAfter = currentEntity.difficulty,
+                durationMs = durationMs.coerceIn(0, MAX_REVIEW_DURATION_MS),
+                wasFirstReview = false,
+                wasFormulaFirstReview = false,
+            )
+            database.withTransaction {
+                reviewDao.upsertStates(listOf(drillEntity))
+                reviewDao.insertLog(drillLog)
+            }
+            val unchanged = currentEntity.toDomain()
+            return ReviewOutcome(
+                state = unchanged,
+                level = LevelUpdate(
+                    levelBefore = current.level,
+                    levelAfter = current.level,
+                    pointsBefore = current.levelPoints,
+                    pointsAfter = current.levelPoints,
+                    leveledUp = false,
+                    leveledDown = false,
+                ),
+                fsrs = FsrsReviewResult(
+                    snapshot = unchanged.snapshot,
+                    intervalMinutes = 0L,
+                    previousIntervalDays = 0,
+                ),
+                scheduled = false,
+            )
+        }
 
         val fsrs = scheduler.review(
             snapshot = current.snapshot,

@@ -62,8 +62,6 @@ class UiScreensTest {
                 HomeScreen(
                     snapshot = sampleHome(),
                     onStartStudy = {},
-                    onOpenLibrary = {},
-                    onOpenModule = {},
                     onOpenStats = {},
                 )
             }

@@ -182,13 +182,17 @@ class StudyViewModel(
                 if (outcome.level.leveledUp) {
                     levelUpMessages += "${item.ability.title} 提升到 Lv.${outcome.level.levelAfter}"
                 }
-                lastIntervalMinutes = outcome.fsrs.intervalMinutes
-                val notice = buildString {
-                    append("下次复习：")
-                    append(formatInterval(outcome.fsrs.intervalMinutes))
-                    if (outcome.level.leveledUp) {
-                        append(" · Lv.")
-                        append(outcome.level.levelAfter)
+                val notice = if (!outcome.scheduled) {
+                    "加练题，不计入复习计划"
+                } else {
+                    lastIntervalMinutes = outcome.fsrs.intervalMinutes
+                    buildString {
+                        append("下次复习：")
+                        append(formatInterval(outcome.fsrs.intervalMinutes))
+                        if (outcome.level.leveledUp) {
+                            append(" · Lv.")
+                            append(outcome.level.levelAfter)
+                        }
                     }
                 }
                 val nextIndex = current.index + 1

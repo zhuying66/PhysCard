@@ -407,7 +407,10 @@ private fun AbilityRow(status: AbilityStatus, onPractice: () -> Unit) {
     val state = status.state
     val level = state?.level ?: 0
     AppCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            // The whole card is the tap target, not just the chevron.
+            .clickable(onClick = onPractice),
         contentPadding = Spacing.md,
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -455,13 +458,11 @@ private fun AbilityRow(status: AbilityStatus, onPractice: () -> Unit) {
                     overflow = TextOverflow.Ellipsis,
                 )
             }
-            IconButton(onClick = onPractice) {
-                Icon(
-                    imageVector = Icons.Rounded.ChevronRight,
-                    contentDescription = "练习${status.ability.title}",
-                    tint = MaterialTheme.colorScheme.primary,
-                )
-            }
+            Icon(
+                imageVector = Icons.Rounded.ChevronRight,
+                contentDescription = "练习${status.ability.title}的全部题目",
+                tint = MaterialTheme.colorScheme.primary,
+            )
         }
     }
 }

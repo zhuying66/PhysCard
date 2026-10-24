@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -34,23 +33,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.physcard.physics.domain.model.HomeSnapshot
-import com.physcard.physics.domain.model.ModuleProgress
 import com.physcard.physics.ui.components.AppBackground
 import com.physcard.physics.ui.components.AppCard
 import com.physcard.physics.ui.components.AppCardShape
 import com.physcard.physics.ui.components.AppPillShape
-import com.physcard.physics.ui.components.MiniProgress
 import com.physcard.physics.ui.components.ProgressRing
-import com.physcard.physics.ui.components.SectionHeader
 import com.physcard.physics.ui.components.Spacing
 import com.physcard.physics.ui.components.StatBlock
 import com.physcard.physics.ui.components.appListBottomPadding
 import com.physcard.physics.ui.components.appSystemInsets
 import com.physcard.physics.ui.components.formatShortDate
-import com.physcard.physics.ui.components.moduleAccent
 import java.time.LocalDate
 import java.time.LocalTime
 import kotlin.math.roundToInt
@@ -59,8 +53,6 @@ import kotlin.math.roundToInt
 fun HomeScreen(
     snapshot: HomeSnapshot,
     onStartStudy: () -> Unit,
-    onOpenLibrary: () -> Unit,
-    onOpenModule: (String) -> Unit,
     onOpenStats: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -104,18 +96,6 @@ fun HomeScreen(
             )
             Spacer(Modifier.height(Spacing.lg))
             TodayStats(snapshot)
-            Spacer(Modifier.height(Spacing.xxl))
-            SectionHeader(
-                title = "公式库",
-                subtitle = "按高中物理知识模块整理",
-                action = "全部",
-                onAction = onOpenLibrary,
-            )
-            Spacer(Modifier.height(Spacing.md))
-            ModuleGrid(
-                modules = snapshot.modules,
-                onOpenModule = onOpenModule,
-            )
             Spacer(Modifier.height(Spacing.xxl))
             ProgressNote(snapshot, onOpenStats)
         }
@@ -300,100 +280,6 @@ private fun TodayStats(snapshot: HomeSnapshot) {
             modifier = Modifier.weight(1f),
             accent = MaterialTheme.colorScheme.primary,
         )
-    }
-}
-
-@Composable
-private fun ModuleGrid(
-    modules: List<ModuleProgress>,
-    onOpenModule: (String) -> Unit,
-) {
-    if (modules.isEmpty()) {
-        AppCard(modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = "正在整理公式模块…",
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
-        return
-    }
-    Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
-        modules.chunked(2).forEach { rowModules ->
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-            ) {
-                rowModules.forEach { progress ->
-                    ModuleCard(
-                        progress = progress,
-                        modifier = Modifier.weight(1f),
-                        onClick = { onOpenModule(progress.module.id) },
-                    )
-                }
-                if (rowModules.size == 1) {
-                    Spacer(Modifier.weight(1f))
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun ModuleCard(
-    progress: ModuleProgress,
-    modifier: Modifier,
-    onClick: () -> Unit,
-) {
-    val accent = moduleAccent(progress.module)
-    val ratio = if (progress.total == 0) 0f else progress.started.toFloat() / progress.total
-    Box(
-        modifier = modifier
-            .clip(AppCardShape)
-            .background(MaterialTheme.colorScheme.surface)
-            .clickable(onClick = onClick)
-            .padding(Spacing.lg),
-    ) {
-        Column {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    Modifier
-                        .size(8.dp)
-                        .clip(CircleShape)
-                        .background(accent),
-                )
-                Spacer(Modifier.weight(1f))
-                Text(
-                    text = "${progress.started}/${progress.total}",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-            Spacer(Modifier.height(Spacing.md))
-            Text(
-                text = progress.module.name,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Spacer(Modifier.height(2.dp))
-            Text(
-                text = progress.module.description,
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Spacer(Modifier.height(Spacing.md))
-            MiniProgress(progress = ratio, color = accent)
-            Spacer(Modifier.height(Spacing.xs))
-            Text(
-                text = if (progress.started == 0) "未开始" else "平均 Lv.${"%.1f".format(progress.averageLevel)}",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
     }
 }
 
