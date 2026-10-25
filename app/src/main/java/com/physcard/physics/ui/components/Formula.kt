@@ -12,6 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.ui.layout.SubcomposeLayout
+import androidx.compose.ui.unit.Constraints
+import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,6 +43,10 @@ import com.physcard.physics.ui.theme.MathFont
  * Renders the app's TeX subset with text and Compose layout primitives: crisp at every density,
  * selectable by screen readers, and fully offline. Fractions get a real rule, square roots get a
  * vinculum, and sub/superscripts use baseline shifts instead of hard-coded offsets.
+ *
+ * A formula cannot be broken across lines the way prose can, so [autoFit] scales the whole
+ * expression down until it fits the available width. That keeps long formulas fully visible
+ * without the reader having to swipe horizontally.
  */
 @Composable
 fun Formula(
@@ -48,6 +55,7 @@ fun Formula(
     fontSize: TextUnit = 24.sp,
     color: Color = MaterialTheme.colorScheme.onSurface,
     contentDescription: String? = null,
+    autoFit: Boolean = false,
 ) {
     val nodes = remember(latex) {
         runCatching { FormulaParser(latex).parse() }
@@ -62,7 +70,42 @@ fun Formula(
         },
         contentAlignment = Alignment.CenterStart,
     ) {
-        FormulaSequence(nodes, fontSize, color)
+        if (autoFit) {
+            FittedFormulaSequence(nodes, fontSize, color)
+        } else {
+            FormulaSequence(nodes, fontSize, color)
+        }
+    }
+}
+
+/**
+ * Measures the sequence at its natural size, then scales it down (never up) to fit the
+ * incoming max width. Height is reduced by the same factor so surrounding layout stays tight.
+ */
+@Composable
+private fun FittedFormulaSequence(
+    nodes: List<FormulaNode>,
+    fontSize: TextUnit,
+    color: Color,
+) {
+    SubcomposeLayout { constraints ->
+        val measurables = subcompose("formula") { FormulaSequence(nodes, fontSize, color) }
+        val placeable = measurables.first().measure(Constraints())
+        val maxWidth = constraints.maxWidth
+        val scale = if (maxWidth != Constraints.Infinity && placeable.width > maxWidth && placeable.width > 0) {
+            maxWidth.toFloat() / placeable.width.toFloat()
+        } else {
+            1f
+        }
+        val width = if (maxWidth == Constraints.Infinity) placeable.width else maxWidth
+        val height = (placeable.height * scale).toInt().coerceAtLeast(1)
+        layout(width, height) {
+            placeable.placeWithLayer(0, 0) {
+                scaleX = scale
+                scaleY = scale
+                transformOrigin = TransformOrigin(0f, 0f)
+            }
+        }
     }
 }
 

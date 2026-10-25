@@ -324,9 +324,12 @@ private fun IntroPane(
                     .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f))
                     .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
             ) {
-                Box(Modifier.horizontalScroll(rememberScrollState())) {
-                    Formula(latex = item.formula.latex, fontSize = 28.sp)
-                }
+                Formula(
+                    latex = item.formula.latex,
+                    fontSize = 28.sp,
+                    autoFit = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
             }
             Spacer(Modifier.height(Spacing.lg))
             Text(
@@ -514,9 +517,12 @@ private fun QuestionPane(
                             )
                             .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
                     ) {
-                        Box(Modifier.horizontalScroll(rememberScrollState())) {
-                            Formula(latex = item.question.stimulusLatex, fontSize = 24.sp)
-                        }
+                        Formula(
+                            latex = item.question.stimulusLatex,
+                            fontSize = 24.sp,
+                            autoFit = true,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
                     }
                 }
             }
@@ -637,24 +643,24 @@ private fun QuestionOptionCard(
             )
         }
         Spacer(Modifier.width(Spacing.md))
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .horizontalScroll(rememberScrollState()),
-        ) {
-            if (option.latex != null) {
-                Formula(
-                    latex = option.latex,
-                    fontSize = 16.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha),
-                )
-            } else {
-                Text(
-                    text = option.text.orEmpty(),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha),
-                )
-            }
+        // Text options wrap onto multiple lines. Formula options cannot break across lines,
+        // so they scale down to fit instead — either way the whole option is visible without
+        // a horizontal swipe, and every card keeps the same width.
+        if (option.latex != null) {
+            Formula(
+                latex = option.latex,
+                fontSize = 16.sp,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha),
+                autoFit = true,
+                modifier = Modifier.weight(1f),
+            )
+        } else {
+            Text(
+                text = option.text.orEmpty(),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha),
+                modifier = Modifier.weight(1f),
+            )
         }
         if (showCorrect) {
             Spacer(Modifier.width(Spacing.sm))
@@ -727,9 +733,12 @@ private fun FeedbackPanel(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             Spacer(Modifier.height(Spacing.xs))
-            Box(Modifier.horizontalScroll(rememberScrollState())) {
-                Formula(latex = item.formula.latex, fontSize = 23.sp)
-            }
+            Formula(
+                latex = item.formula.latex,
+                fontSize = 23.sp,
+                autoFit = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
             Spacer(Modifier.height(Spacing.sm))
             Text(
                 text = item.formula.conditions,
@@ -1156,9 +1165,12 @@ private fun FormulaReferenceSheet(formula: Formula, ability: Ability) {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Spacer(Modifier.height(Spacing.md))
-        Box(Modifier.horizontalScroll(rememberScrollState())) {
-            Formula(latex = formula.latex, fontSize = 26.sp)
-        }
+        Formula(
+            latex = formula.latex,
+            fontSize = 26.sp,
+            autoFit = true,
+            modifier = Modifier.fillMaxWidth(),
+        )
         Spacer(Modifier.height(Spacing.lg))
         Text(
             text = formula.conditions,

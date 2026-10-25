@@ -2,7 +2,6 @@ package com.physcard.physics.ui.library
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +18,6 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -299,17 +297,12 @@ private fun FormulaHero(
                 )
                 .padding(horizontal = Spacing.lg, vertical = Spacing.xl),
         ) {
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState()),
-            ) {
-                Formula(
-                    latex = formula.latex,
-                    fontSize = 28.sp,
-                    modifier = Modifier.fillMaxWidth(),
-                )
-            }
+            Formula(
+                latex = formula.latex,
+                fontSize = 28.sp,
+                autoFit = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
         Spacer(Modifier.height(Spacing.md))
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -385,13 +378,13 @@ private fun ConfusionCard(wrong: String, why: String) {
                 Spacer(Modifier.weight(1f))
             }
             Spacer(Modifier.height(Spacing.xs))
-            Box(Modifier.horizontalScroll(rememberScrollState())) {
-                Formula(
-                    latex = wrong,
-                    fontSize = 18.sp,
-                    color = MaterialTheme.colorScheme.error,
-                )
-            }
+            Formula(
+                latex = wrong,
+                fontSize = 18.sp,
+                color = MaterialTheme.colorScheme.error,
+                autoFit = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
             Spacer(Modifier.height(Spacing.xs))
             Text(
                 text = why,

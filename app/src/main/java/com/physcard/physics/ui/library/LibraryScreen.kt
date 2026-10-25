@@ -2,7 +2,6 @@ package com.physcard.physics.ui.library
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -297,17 +295,13 @@ private fun FormulaLibraryCard(card: FormulaCardUi, onClick: () -> Unit) {
                 )
             }
             Spacer(Modifier.height(Spacing.xs))
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState()),
-            ) {
-                Formula(
-                    latex = card.formula.latex,
-                    fontSize = 15.sp,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.82f),
-                )
-            }
+            Formula(
+                latex = card.formula.latex,
+                fontSize = 15.sp,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.82f),
+                autoFit = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
         }
         Spacer(Modifier.width(Spacing.sm))
         if (card.averageLevel > 0) {
